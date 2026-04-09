@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S. Embalagens | Fábrica de Caixas de Papelão e Insumos</title>
+    
+    <link rel="icon" type="image/png" href="./imagens/favicon.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="./output.css">
+
+    <style>
+        /* --- ESTILOS GERAIS --- */
+        .catalogo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .card-catalogo { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; transition: all 0.3s ease; display: flex; flex-direction: column; position: relative; }
+        .card-catalogo:hover { box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-color: #0f172a; transform: translateY(-5px); }
+        .card-link-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .card-catalogo img { width: 100%; height: auto; border-bottom: 1px solid #e2e8f0; }
+        .card-conteudo { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+        .tag-destaque { background: #eff6ff; color: #1d4ed8; font-size: 0.8rem; font-weight: 700; padding: 4px 10px; border-radius: 20px; display: inline-block; margin-bottom: 15px; align-self: flex-start; position: relative; z-index: 2; }
+        .tag-frete { background: #ecfdf5; color: #047857; }
+        .lista-specs { list-style: none; padding: 0; margin: 15px 0; font-size: 0.9rem; color: #475569; }
+        .lista-specs li { margin-bottom: 5px; padding-left: 15px; position: relative; }
+        .lista-specs li::before { content: "•"; color: #ea580c; position: absolute; left: 0; font-weight: bold; }
+        .pedido-minimo { margin-top: auto; font-weight: 700; color: #0f172a; padding-top: 15px; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2; }
+        .btn-produto { position: relative; z-index: 3; cursor: pointer; background: none; border: none; color: var(--cor-destaque); font-family: 'Inter'; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; padding: 5px 15px; }
+        .btn-produto:hover { text-decoration: underline; }
+
+        /* --- CARROSSEL DE PARCEIROS (AJUSTADO PARA LOOP INFINITO) --- */
+        .marquee-container { overflow: hidden; width: 100%; padding: 40px 0; background: #fff; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; display: flex; position: relative; }
+        .marquee-track { display: flex; width: max-content; animation: scrollMarquee 35s linear infinite; }
+        .marquee-track img { height: 50px; margin: 0 40px; object-fit: contain; filter: grayscale(100%); opacity: 0.6; transition: all 0.3s ease; flex-shrink: 0; }
+        .marquee-track img:hover { filter: grayscale(0%); opacity: 1; transform: scale(1.1); }
+        @keyframes scrollMarquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .marquee-container:hover .marquee-track { animation-play-state: paused; }
+
+        /* --- CONTATO E FORMULÁRIO --- */
+        .contato-wrapper { display: flex; justify-content: center; padding: 80px 20px; background-color: var(--bg-cinza); position: relative; }
+        .form-container { background: #fff; border-radius: 20px; padding: 50px 40px 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); width: 100%; max-width: 600px; position: relative; margin-top: 30px; }
+        .form-titulo-flutuante { position: absolute; top: -25px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #4f1e31 0%, var(--cor-primaria) 100%); color: #fff; padding: 12px 40px; border-radius: 10px; font-family: var(--fonte-titulo); font-size: 1.2rem; font-weight: 700; white-space: nowrap; box-shadow: 0 8px 20px rgba(15, 23, 42, 0.4); }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 25px; }
+        .form-group { display: flex; flex-direction: column; text-align: left; }
+        .form-group.full-width { grid-column: 1 / -1; }
+        .form-label { font-weight: 600; color: var(--cor-primaria); margin-bottom: 5px; font-size: 0.95rem; }
+        .form-label span { color: #e11d48; margin-left: 3px; }
+        .form-input { border: none; border-bottom: 2px solid #881337; padding: 10px 0; font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--cor-texto); background: transparent; transition: border-color 0.3s; width: 100%; }
+        .form-input:focus { outline: none; border-bottom-color: var(--cor-destaque); }
+        textarea.form-input { resize: vertical; min-height: 40px; }
+        .btn-enviar-form { width: 100%; background: var(--cor-primaria); color: #fed7aa; padding: 16px; border: none; border-radius: 8px; font-family: var(--fonte-titulo); font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; display: flex; justify-content: center; align-items: center; gap: 10px; }
+        .btn-enviar-form:hover { background: #1e293b; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(15, 23, 42, 0.3); }
+
+        /* --- MODAL --- */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.7); z-index: 2000; display: none; justify-content: center; align-items: center; padding: 20px; backdrop-filter: blur(5px); }
+        .modal-box { background: #fff; border-radius: 16px; padding: 40px 30px; width: 100%; max-width: 450px; position: relative; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); animation: modalFadeIn 0.3s ease; }
+        .modal-close { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 2rem; color: #94a3b8; cursor: pointer; transition: color 0.2s; line-height: 1; }
+        .modal-close:hover { color: #e11d48; }
+        @keyframes modalFadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        select.form-input { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ea580c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 5px center; background-size: 1.2em; padding-right: 30px; }
+        .btn-leadster { background: var(--cor-destaque); color: #fff; padding: 14px; border-radius: 8px; font-weight: 700; width: 100%; border: none; cursor: pointer; transition: 0.3s; display: flex; justify-content: center; align-items: center; gap: 10px; font-size: 1.05rem; }
+        .btn-leadster:hover { background: var(--cor-destaque-hover); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(234, 88, 12, 0.3); }
+        
+        /* --- LOGO & MENU --- */
+        .social-icon { display: inline-flex; align-items: center; justify-content: center; color: var(--cor-primaria); transition: color 0.3s ease, transform 0.3s ease; margin-left: 30px; vertical-align: middle; }
+        .social-icon:hover { color: #E1306C; transform: scale(1.15); }
+        .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .footer-social a { color: #94a3b8; transition: color 0.3s ease, transform 0.3s ease; display: inline-block; }
+        .footer-social a:hover { color: #E1306C; transform: scale(1.15); }
+        .logo { text-decoration: none; display: flex; align-items: center; }
+        .logo img { height: 50px; width: auto; display: block; }
+        .menu-toggle { display: none; background: none; border: none; color: var(--cor-primaria); cursor: pointer; padding: 5px; }
+
+        /* --- RESPONSIVIDADE --- */
+        @media (max-width: 900px) {
+            .navbar { flex-direction: row; justify-content: space-between; padding: 0 20px; height: 70px; }
+            .menu-toggle { display: block; z-index: 1001; }
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: #ffffff;
+                padding: 20px;
+                box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+                border-top: 1px solid #eee;
+                text-align: center;
+                gap: 20px;
+                z-index: 1000;
+            }
+            .nav-menu.active { display: flex; animation: slideDown 0.3s ease-out; }
+            .nav-menu a { margin: 0; font-size: 1rem; width: 100%; padding: 10px 0; border-bottom: 1px solid #f8fafc; }
+            .social-icon { margin: 10px auto 0; }
+            section { padding: 40px 0; }
+            .section-title { font-size: 2rem; margin-bottom: 30px; }
+            .hero-novo-design { padding-top: 100px; text-align: center; }
+            .hero-container-grid { flex-direction: column-reverse; gap: 30px; }
+            .titulo-principal-hero { font-size: 2rem; }
+            .hero-imagem-fundo { height: 250px; }
+            .modal-box { margin: 15px; padding: 30px 20px; }
+        }
+
+        @media (max-width: 768px) {
+            .form-container { padding: 40px 20px 30px; margin-top: 40px; }
+            .form-grid { grid-template-columns: 1fr; gap: 20px; }
+            .form-titulo-flutuante { font-size: 1rem; padding: 10px 20px; width: 90%; text-align: center; white-space: normal; top: -30px; }
+            .footer-content { flex-direction: column; text-align: center; }
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="container navbar">
+        <a href="index.html" class="logo">
+            <img src="./imagens/logo.png" alt="S. Embalagens">
+        </a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+
+        <nav class="nav-menu" id="navMenu">
+             <a href="#catalogo">Catálogo de Produtos</a>
+             <a href="#diferenciais">Compromisso</a>
+             <a href="#depoimentos">Parcerias</a>
+             <a href="#contato">Contato</a>
+             <a href="https://www.instagram.com/salesemb" target="_blank" class="social-icon" title="Siga-nos no Instagram">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                     <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                     <path d="M16.113 11.44a5 5 0 1 1-2.226-5.06M17.5 6.5h.01"></path>
+                 </svg>
+             </a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="hero-novo-design">
+        <div class="container hero-container-grid">
+            <div class="hero-content-novo">
+                <span class="tagline-principal">SUA OPERAÇÃO NÃO PODE PARAR</span>
+                <h1 class="titulo-principal-hero">Soluções completas em embalagens.</h1>
+                <p class="descricao-hero">Caixas de papelão, bobinas, chapas e caixas de pizza. Atendemos gráficas, e-commerces, indústrias e pizzarias com qualidade e preço de fábrica.</p>
+                <a href="#catalogo" class="btn-novo">Ver Catálogo Completo</a>
+            </div>
+            <div class="hero-imagem-fundo">
+                <img src="./imagens/01.png" alt="Caixas de papelão personalizadas" style="object-fit: cover;">
+            </div>
+        </div>
+    </section>
+
+    <section id="catalogo" class="bg-cinza" style="padding-top: 100px;">
+        <div class="container">
+            <h2 class="section-title">Nosso Catálogo</h2>
+            
+            <div class="catalogo-grid">
+                
+                <div class="card-catalogo">
+                    <a href="caixas-personalizadas.html" class="card-link-overlay"></a>
+                    <img src="./imagens/01.png" alt="Caixas de Papelão Personalizadas">
+                    <div class="card-conteudo">
+                        <h3 style="font-size: 1.25rem; font-family: var(--fonte-titulo); color: var(--cor-primaria);">Caixas Personalizadas</h3>
+                        <ul class="lista-specs">
+                            <li>Ondas: B, C e B/C</li>
+                            <li>Cores: Parda e Parda/Branca</li>
+                        </ul>
+                        <div class="pedido-minimo">
+                            <span>Mínimo: 500 un</span>
+                            <button onclick="abrirOrcamento(event, 'Caixas de Papelão Personalizadas', '500 unidades')" class="btn-produto">Orçar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-catalogo">
+                    <img src="./imagens/02.png" alt="Caixas à Pronta Entrega">
+                    <div class="card-conteudo">
+                        <span class="tag-destaque" style="background: #fee2e2; color: #b91c1c;">Urgência</span>
+                        <h3 style="font-size: 1.25rem; font-family: var(--fonte-titulo); color: var(--cor-primaria);">Caixas à Pronta Entrega</h3>
+                        <p style="font-size: 0.9rem; color: #64748b; margin-top: 5px;">Entrega imediata para demandas urgentes.</p>
+                        <div class="pedido-minimo">
+                            <span>Mínimo: 100 un</span>
+                            <button onclick="abrirOrcamento(event, 'Caixas à Pronta Entrega', '100 unidades')" class="btn-produto">Orçar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-catalogo">
+                    <a href="caixas-pizza.html" class="card-link-overlay"></a>
+                    <div class="card-conteudo">
+                        <span class="tag-destaque tag-frete">Frete Grátis*</span>
+                        <img src="./imagens/03.png" alt="Caixas de Pizza Personalizadas" style="border-bottom: none; margin-bottom: 20px;">
+                        <h3 style="font-size: 1.25rem; font-family: var(--fonte-titulo); color: var(--cor-primaria);">Caixas de Pizza</h3>
+                        <ul class="lista-specs">
+                            <li>Offset 4 cores ou 2 cores</li>
+                            <li>Fundo laminado ou liso</li>
+                        </ul>
+                        <div class="pedido-minimo">
+                            <span>Mínimo: 500 un</span>
+                            <button onclick="abrirOrcamento(event, 'Caixas de Pizza Personalizadas', '500 unidades')" class="btn-produto">Orçar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-catalogo">
+                    <img src="./imagens/07.png" alt="Caixas de Pizza Oitavadas">
+                    <div class="card-conteudo">
+                        <h3 style="font-size: 1.25rem; font-family: var(--fonte-titulo); color: var(--cor-primaria);">Caixas de Pizza Oitavadas</h3>
+                        <p style="font-size: 0.9rem; color: #64748b;">Opção ideal para atacado e revenda.</p>
+                        <div class="pedido-minimo">
+                            <span>Mínimo: 50 fardos</span>
+                            <button onclick="abrirOrcamento(event, 'Caixas de Pizza Oitavadas', '50 fardos')" class="btn-produto">Orçar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-catalogo">
+                    <img src="./imagens/04.png" alt="Caixas para Mudança">
+                    <div class="card-conteudo">
+                        <h3 style="font-size: 1.25rem; font-family: var(--fonte-titulo); color: var(--cor-primaria);">Caixas para Mudança</h3>
+                        <p style="font-size: 0.9rem; color: #64748b;">Caixas reforçadas em 5 tamanhos diferentes.</p>
+                        <div class="pedido-minimo">
+                            <span>Mínimo: 10 un</span>
+                            <button onclick="abrirOrcamento(event, 'Caixas para Mudança', '10 unidades')" class="btn-produto">Orçar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-catalogo">
+                    <img src="./imagens/05.png" alt="Chapas de Papelão">
+                    <div class="card-conteudo">
+                        <h3 style="font-size: 1.25rem; font-family: var(--fonte-titulo); color: var(--cor-primaria);">Chapas de Papelão</h3>
+                        <ul class="lista-specs">
+                            <li>Diversas gramaturas</li>
+                            <li>Preço direto de fábrica</li>
+                        </ul>
+                        <div class="pedido-minimo">
+                            <span>Mínimo: 2000 un</span>
+                            <button onclick="abrirOrcamento(event, 'Chapas de Papelão', '2000 unidades')" class="btn-produto">Orçar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-catalogo">
+                    <img src="./imagens/06.png" alt="Bobinas Onduladas">
+                    <div class="card-conteudo">
+                        <h3 style="font-size: 1.25rem; font-family: var(--fonte-titulo); color: var(--cor-primaria);">Bobinas Ondulado (Simplex)</h3>
+                        <ul class="lista-specs">
+                            <li>1000mm ou 1200mm</li>
+                            <li>Bobinas de 50kg</li>
+                        </ul>
+                        <div class="pedido-minimo">
+                            <span>Mínimo: 2 un</span>
+                            <button onclick="abrirOrcamento(event, 'Bobinas Onduladas', '2 unidades')" class="btn-produto">Orçar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-catalogo">
+                    <img src="./imagens/08.png" alt="Bobinas Semi Kraft">
+                    <div class="card-conteudo">
+                        <h3 style="font-size: 1.25rem; font-family: var(--fonte-titulo); color: var(--cor-primaria);">Bobinas Semi Kraft</h3>
+                        <p style="font-size: 0.9rem; color: #64748b;">Qualidade para embalagem e proteção.</p>
+                        <div class="pedido-minimo">
+                            <span>Mínimo: 3 un</span>
+                            <button onclick="abrirOrcamento(event, 'Bobinas Semi Kraft', '3 unidades')" class="btn-produto">Orçar</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <p style="text-align: right; font-size: 0.8rem; color: #64748b; margin-top: 20px;">*Região metropolitana de Fortaleza.</p>
+        </div>
+    </section>
+
+    <section id="parceiros" style="padding: 60px 0;">
+        <div class="container text-center" style="margin-bottom: 30px;">
+            <span style="color: #64748b; font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">Marcas que confiam na S. Embalagens</span>
+        </div>
+        <div class="marquee-container">
+            <div class="marquee-track">
+                <img src="./imagens/boticario.png" alt="Boticário">
+                <img src="./imagens/cagece.png" alt="Cagece">
+                <img src="./imagens/goldentec.png" alt="Goldentec">
+                <img src="./imagens/hidrotintas.png" alt="Hidrotintas">
+                <img src="./imagens/ley.png" alt="Ley">
+                <img src="./imagens/livraria.png" alt="Livraria">
+                <img src="./imagens/pepy.png" alt="Pepy">
+                <img src="./imagens/tpc.png" alt="TPC">
+                <img src="./imagens/wurth.png" alt="Wurth">
+                <img src="./imagens/boticario.png" alt="Boticário">
+                <img src="./imagens/cagece.png" alt="Cagece">
+                <img src="./imagens/goldentec.png" alt="Goldentec">
+                <img src="./imagens/hidrotintas.png" alt="Hidrotintas">
+                <img src="./imagens/ley.png" alt="Ley">
+                <img src="./imagens/livraria.png" alt="Livraria">
+                <img src="./imagens/pepy.png" alt="Pepy">
+                <img src="./imagens/tpc.png" alt="TPC">
+                <img src="./imagens/wurth.png" alt="Wurth">
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="contato-wrapper">
+        <div class="form-container">
+            <div class="form-titulo-flutuante">Deixe seu contato</div>
+            <form action="#" method="POST">
+                <div class="form-grid">
+                    <div class="form-group"><label class="form-label">Nome <span>*</span></label><input type="text" class="form-input" required></div>
+                    <div class="form-group"><label class="form-label">E-mail: <span>*</span></label><input type="email" class="form-input" required></div>
+                    <div class="form-group full-width"><label class="form-label">CNPJ: <span>*</span></label><input type="text" class="form-input" required></div>
+                    <div class="form-group full-width"><label class="form-label">Whatsapp: <span>*</span></label><input type="tel" class="form-input" required></div>
+                    <div class="form-group full-width" style="margin-bottom: 20px;"><label class="form-label">Mensagem:</label><textarea class="form-input" rows="2"></textarea></div>
+                </div>
+                <button type="submit" class="btn-enviar-form">Iniciar Contato</button>
+            </form>
+        </div>
+    </section>
+</main>
+
+<footer id="footer" class="footer" style="padding: 40px 0; background: #061c41;">
+    <div class="container footer-content">
+        <p style="margin: 0;">&copy; 2026 S. Embalagens. Todos os direitos reservados. Fortaleza, CE.</p>
+        <div class="footer-social">
+            <a href="https://www.instagram.com/salesemb" target="_blank">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                     <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                     <path d="M16.113 11.44a5 5 0 1 1-2.226-5.06M17.5 6.5h.01"></path>
+                 </svg>
+            </a>
+        </div>
+    </div>
+</footer>
+
+<div id="modalOrcamento" class="modal-overlay">
+    <div class="modal-box">
+        <button class="modal-close" onclick="fecharOrcamento()">&times;</button>
+        <h3>Orçamento Rápido</h3>
+        <p>Configure o seu pedido abaixo.</p>
+        <div class="form-group"><label class="form-label">Produto</label><input type="text" id="modalProduto" class="form-input" readonly></div>
+        <div class="form-group"><label class="form-label">Quantidade</label><input type="text" id="modalQtd" class="form-input"></div>
+        <div class="form-group"><label class="form-label">Pagamento</label>
+            <select id="modalPagamento" class="form-input">
+                <option value="Pix">Pix</option>
+                <option value="Boleto">Boleto</option>
+                <option value="Cartão">Cartão</option>
+            </select>
+        </div>
+        <button onclick="redirecionarLeadster()" class="btn-leadster">Iniciar Atendimento</button>
+    </div>
+</div>
+
+<script>
+    // Menu Mobile
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+    menuToggle.addEventListener('click', () => navMenu.classList.toggle('active'));
+    document.querySelectorAll('.nav-menu a').forEach(link => link.addEventListener('click', () => navMenu.classList.remove('active')));
+
+    // Orçamento Modal
+    function abrirOrcamento(event, produto, minQtdTexto) {
+        event.preventDefault(); event.stopPropagation(); 
+        document.getElementById('modalOrcamento').style.display = 'flex';
+        document.getElementById('modalProduto').value = produto;
+        document.getElementById('modalQtd').value = minQtdTexto;
+    }
+    function fecharOrcamento() { document.getElementById('modalOrcamento').style.display = 'none'; }
+    function redirecionarLeadster() {
+        const produto = document.getElementById('modalProduto').value;
+        const qtd = document.getElementById('modalQtd').value;
+        const pagamento = document.getElementById('modalPagamento').value;
+        const leadsterUrl = `https://app.leadster.com.br/capture/S3cED9kjoR9eRjJs?produto=${encodeURIComponent(produto)}&quantidade=${encodeURIComponent(qtd)}&pagamento=${encodeURIComponent(pagamento)}`;
+        window.open(leadsterUrl, '_blank');
+        fecharOrcamento();
+    }
+</script>
+</body>
+</html>

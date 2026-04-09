@@ -1,0 +1,357 @@
+/*
+Theme Name: S Embalagens Landing Page
+Author: Carolina Lemos
+Description: Tema B2B Corporativo e Industrial
+Version: 1.2
+*/
+@import "tailwindcss";
+html { scroll-behavior: smooth; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body { 
+    font-family: 'Inter', sans-serif; 
+    line-height: 1.6; 
+    color: #334155; /* Cinza escuro chumbo */
+    background-color: #ffffff; 
+    -webkit-font-smoothing: antialiased; 
+}
+
+img { max-width: 100%; height: auto; display: block; }
+a { text-decoration: none; transition: color 0.3s ease; }
+ul { list-style: none; }
+
+/* --- VARIÁVEIS B2B --- */
+:root {
+    --cor-primaria: #0f172a; /* Azul marinho muito escuro / Slate */
+    --cor-destaque: #ea580c; /* Laranja forte (Kraft/Ação) */
+    --cor-destaque-hover: #c2410c; 
+    --cor-texto: #1e293b;
+    --cor-texto-suave: #64748b;
+    --bg-cinza: #f8fafc;
+    --branco: #ffffff;
+    --fonte-titulo: 'Montserrat', sans-serif;
+    --sombra-padrao: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+section { padding: 80px 0; width: 100%; display: block; }
+.text-center { text-align: center; }
+.bg-cinza { background-color: var(--bg-cinza); }
+
+/* --- TÍTULOS --- */
+.section-title {
+    font-family: var(--fonte-titulo);
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 50px;
+    font-weight: 800;
+    color: var(--cor-primaria);
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+}
+
+/* --- BOTÕES --- */
+.btn-novo {
+    display: inline-block;
+    background: var(--cor-destaque);
+    color: var(--branco);
+    padding: 16px 35px;
+    border-radius: 6px; /* Menos arredondado para cara de B2B/Indústria */
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(234, 88, 12, 0.2);
+}
+
+.btn-novo:hover { 
+    background: var(--cor-destaque-hover);
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 15px rgba(234, 88, 12, 0.3);
+}
+
+.btn-invertido { background: var(--branco); color: var(--cor-primaria); }
+.btn-invertido:hover { background: #f1f5f9; color: var(--cor-primaria); }
+
+/* --- HEADER FIXO --- */
+.header { 
+    background: var(--branco); 
+    padding: 15px 0; 
+    position: fixed; 
+    width: 100%; 
+    top: 0; 
+    z-index: 1000; 
+    box-shadow: var(--sombra-padrao); 
+    transition: top 0.3s;
+}
+.admin-bar .header { top: 32px; }
+.navbar { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-family: var(--fonte-titulo); font-size: 1.6rem; font-weight: 800; color: var(--cor-primaria); }
+
+.nav-menu a { 
+    margin-left: 30px; 
+    color: var(--cor-texto); 
+    font-weight: 600; 
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+.nav-menu a:hover { color: var(--cor-destaque); }
+
+/* --- HERO SECTION --- */
+.hero-novo-design { padding-top: 150px; padding-bottom: 90px; background-color: var(--bg-cinza); }
+.hero-container-grid { display: flex; align-items: center; justify-content: space-between; gap: 50px; }
+.hero-content-novo { flex: 1; text-align: left; }
+
+.tagline-principal { 
+    color: var(--cor-destaque); 
+    letter-spacing: 2px; 
+    font-weight: 700; 
+    font-size: 0.9rem;
+    margin-bottom: 15px; 
+    display: block;
+    text-transform: uppercase;
+}
+
+.titulo-principal-hero { 
+    font-family: var(--fonte-titulo); 
+    font-size: 3.5rem; 
+    line-height: 1.1; 
+    margin-bottom: 20px; 
+    color: var(--cor-primaria);
+    font-weight: 800;
+}
+
+.descricao-hero { font-size: 1.15rem; color: var(--cor-texto-suave); margin-bottom: 40px; max-width: 500px; }
+
+.hero-imagem-fundo { flex: 1; max-width: 45%; height: 500px; }
+.hero-imagem-fundo img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    border-radius: 8px; 
+    box-shadow: var(--sombra-padrao);
+}
+
+/* --- DIFERENCIAIS --- */
+.diferenciais-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+.card-diferencial { 
+    background: var(--branco); 
+    padding: 40px 30px; 
+    border-radius: 8px; 
+    text-align: center; 
+    box-shadow: var(--sombra-padrao); 
+    border-top: 4px solid var(--cor-destaque);
+}
+.icone-diferencial { font-size: 3rem; margin-bottom: 15px; }
+.card-diferencial h3 { font-family: var(--fonte-titulo); font-size: 1.3rem; margin-bottom: 15px; color: var(--cor-primaria); }
+
+/* --- PRODUTOS --- */
+.product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+.product-card { 
+    background: var(--branco); 
+    padding: 25px; 
+    border-radius: 8px; 
+    text-align: left; 
+    border: 1px solid #e2e8f0;
+    transition: 0.3s;
+}
+.product-card:hover { box-shadow: var(--sombra-padrao); border-color: var(--cor-destaque); }
+.product-card img { border-radius: 6px; margin-bottom: 20px; width: 100%; height: 200px; object-fit: cover;}
+.product-card h3 { margin: 0 0 10px; font-size: 1.4rem; font-family: var(--fonte-titulo); color: var(--cor-primaria);}
+.product-card p { color: var(--cor-texto-suave); margin-bottom: 20px; min-height: 50px; }
+
+.btn-produto { 
+    color: var(--cor-destaque); 
+    font-weight: 700; 
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+.btn-produto:hover { text-decoration: underline; }
+
+/* --- FÁBRICA / SUSTENTABILIDADE --- */
+.fabrica-info { display: flex; align-items: center; gap: 50px; background: var(--branco); padding: 50px; border-radius: 8px; box-shadow: var(--sombra-padrao); border-left: 6px solid #10b981; /* Verde Sustentável */}
+.fabrica-imagem { flex: 1; }
+.fabrica-imagem img { border-radius: 8px; }
+.fabrica-texto { flex: 1; }
+.fabrica-texto h3 { font-family: var(--fonte-titulo); font-size: 2rem; margin-bottom: 20px; color: var(--cor-primaria);}
+.lista-beneficios { margin: 30px 0; }
+.lista-beneficios li { margin-bottom: 15px; font-size: 1.1rem; color: var(--cor-texto); }
+.lista-beneficios li strong { color: #10b981; margin-right: 10px; }
+
+/* --- DEPOIMENTOS TEXTUAIS B2B --- */
+.depoimentos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+.b2b-card {
+    background: var(--branco);
+    padding: 30px;
+    border-radius: 8px;
+    text-align: left;
+    box-shadow: var(--sombra-padrao);
+    border: 1px solid #e2e8f0;
+}
+.b2b-card p { font-style: italic; color: var(--cor-texto-suave); margin-bottom: 20px; }
+.b2b-card strong { display: block; color: var(--cor-primaria); font-size: 1.1rem;}
+.b2b-card span { font-size: 0.9rem; color: var(--cor-destaque); font-weight: 600;}
+
+/* --- CARROSSEL DE PARCEIROS (LOOP INFINITO CORRIGIDO E CORES ORIGINAIS) --- */
+.marquee-container {
+    overflow: hidden;
+    width: 100%;
+    padding: 40px 0;
+    background: #fff;
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    white-space: nowrap;
+}
+.marquee-track {
+    display: flex;
+    align-items: center;
+    gap: 80px; /* Espaço uniforme entre os logos */
+    padding-right: 80px; /* Garante que não há "salto" no fim do loop */
+    animation: scrollMarquee 30s linear infinite;
+}
+
+/* Logos com as cores originais, mantendo o efeito hover suave (scale) */
+.marquee-track img {
+    height: 60px;
+    object-fit: contain;
+    max-width: 180px;
+    transition: transform 0.3s ease;
+}
+.marquee-track img:hover {
+    transform: scale(1.1); /* Ligeiro destaque ao passar o rato */
+}
+
+@keyframes scrollMarquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); } 
+}
+
+.marquee-container:hover .marquee-track {
+    animation-play-state: paused;
+}
+
+/* --- FORMULÁRIO DE CONTACTO --- */
+.contato-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 80px 20px;
+    background-color: var(--bg-cinza);
+    position: relative;
+}
+.form-container {
+    background: #fff;
+    border-radius: 20px;
+    padding: 50px 40px 40px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+    margin-top: 30px; 
+}
+.form-titulo-flutuante {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #4f1e31 0%, var(--cor-primaria) 100%);
+    color: #fff;
+    padding: 12px 40px;
+    border-radius: 10px;
+    font-family: var(--fonte-titulo);
+    font-size: 1.2rem;
+    font-weight: 700;
+    white-space: nowrap;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.4);
+}
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-bottom: 25px;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+.form-label {
+    font-weight: 600;
+    color: var(--cor-primaria);
+    margin-bottom: 5px;
+    font-size: 0.95rem;
+}
+.form-label span {
+    color: #e11d48; 
+    margin-left: 3px;
+}
+.form-input {
+    border: none;
+    border-bottom: 2px solid #881337; 
+    padding: 10px 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: var(--cor-texto);
+    background: transparent;
+    transition: border-color 0.3s;
+}
+.form-input:focus {
+    outline: none;
+    border-bottom-color: var(--cor-destaque);
+}
+textarea.form-input {
+    resize: vertical;
+    min-height: 40px;
+}
+.btn-enviar-form {
+    width: 100%;
+    background: var(--cor-primaria);
+    color: #fed7aa; 
+    padding: 16px;
+    border: none;
+    border-radius: 8px;
+    font-family: var(--fonte-titulo);
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.btn-enviar-form:hover {
+    background: #1e293b;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(15, 23, 42, 0.3);
+}
+
+/* --- CTA FINAL --- */
+.cta-final { background: var(--cor-primaria); color: var(--branco); text-align: center; padding: 100px 0; }
+.cta-final h2 { color: var(--branco); margin-bottom: 15px; font-family: var(--fonte-titulo); font-size: 2.5rem;}
+
+/* --- FOOTER --- */
+.footer { background: #020617; color: #94a3b8; text-align: center; padding: 30px 0; font-size: 0.9rem; }
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 900px) {
+    section { padding: 60px 0; }
+    .section-title { font-size: 2rem; }
+    .navbar { flex-direction: column; gap: 15px; }
+    .nav-menu { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+    .nav-menu a { margin: 0; font-size: 0.9rem; padding: 5px 10px; background: #f1f5f9; border-radius: 4px; }
+    .hero-novo-design { padding-top: 150px; text-align: center; }
+    .hero-container-grid { flex-direction: column-reverse; gap: 30px; }
+    .hero-content-novo { text-align: center; }
+    .titulo-principal-hero { font-size: 2.5rem; }
+    .hero-imagem-fundo { max-width: 100%; height: 350px; margin-bottom: 20px; }
+    .fabrica-info { flex-direction: column; padding: 30px; border-left: none; border-top: 6px solid #10b981; }
+    
+    /* Ajustes Form Mobile */
+    .form-grid { grid-template-columns: 1fr; gap: 20px; }
+    .form-container { padding: 40px 20px 30px; }
+}
