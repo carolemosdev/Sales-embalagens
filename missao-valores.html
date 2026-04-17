@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missão e Valores | S. Embalagens</title>
+    
+    <link rel="icon" type="image/png" href="./imagens/favicon.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./output.css">
+
+    <style>
+        /* --- ROLAGEM SUAVE --- */
+        html { scroll-behavior: smooth; scroll-padding-top: 110px; }
+
+        :root { 
+            --cor-primaria: #061c41; 
+            --cor-destaque: #e30a21; 
+            --bg-cinza: #f8fafc; 
+            --fonte-titulo: 'Montserrat', sans-serif; 
+        }
+        
+        body { font-family: 'Inter', sans-serif; color: #334155; background-color: var(--bg-cinza); margin: 0; padding: 0; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* --- HEADER E MENU FLUTUANTE --- */
+        .header { 
+            background: var(--bg-cinza); 
+            padding: 10px 30px; 
+            position: fixed; 
+            width: calc(100% - 40px);
+            max-width: 1200px;
+            top: 20px; 
+            left: 50%;
+            transform: translateX(-50%); 
+            z-index: 1000; 
+            border-radius: 50px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06); 
+            border: 1px solid rgba(255,255,255,0.8); 
+        }
+        .navbar { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .logo { text-decoration: none; display: flex; align-items: center; }
+        .logo img { height: 45px; width: auto; display: block; }
+        
+        .nav-menu { display: flex; align-items: center; }
+        .nav-menu a { margin-left: 30px; color: var(--cor-primaria); font-weight: 600; text-decoration: none; transition: color 0.3s; }
+        .nav-menu a:hover { color: var(--cor-destaque); }
+        .menu-toggle { display: none; background: none; border: none; color: var(--cor-primaria); cursor: pointer; padding: 5px; }
+
+        /* --- PÁGINA DE MISSÃO E VALORES --- */
+        .pagina-hero { padding: 180px 20px 80px; text-align: center; background-color: var(--cor-primaria); color: #fff; }
+        .pagina-hero h1 { font-family: var(--fonte-titulo); font-size: 3rem; margin-bottom: 20px; }
+        .pagina-hero p { font-size: 1.1rem; max-width: 700px; margin: 0 auto; color: #cbd5e1; line-height: 1.6; }
+        
+        .mvv-section { padding: 80px 0; }
+        .mvv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 40px; }
+        
+        .mvv-card { background: #fff; border-radius: 16px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); position: relative; border-top: 4px solid var(--cor-destaque); transition: 0.3s; }
+        .mvv-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
+        .mvv-icone { font-size: 3rem; margin-bottom: 20px; display: inline-block; background: #fff1f2; padding: 15px; border-radius: 12px; }
+        .mvv-card h3 { font-family: var(--fonte-titulo); font-size: 1.8rem; color: var(--cor-primaria); margin-bottom: 15px; }
+        .mvv-card p { font-size: 1.05rem; color: #475569; line-height: 1.7; }
+        
+        .valores-lista { list-style: none; padding: 0; margin-top: 20px; }
+        .valores-lista li { margin-bottom: 10px; font-weight: 600; color: var(--cor-primaria); display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; }
+        .valores-lista li::before { content: '✓'; color: var(--cor-destaque); font-weight: bold; }
+
+        /* --- REDES SOCIAIS E FOOTER --- */
+        .social-icon { display: inline-flex; align-items: center; justify-content: center; color: var(--cor-primaria); transition: color 0.3s ease, transform 0.3s ease; margin-left: 30px; vertical-align: middle; }
+        .social-icon:hover { color: var(--cor-destaque); transform: scale(1.15); }
+        .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .footer-social a { color: #fff; transition: color 0.3s ease, transform 0.3s ease; display: inline-block; opacity: 0.8; }
+        .footer-social a:hover { color: var(--cor-destaque); transform: scale(1.15); opacity: 1; }
+
+        /* --- RESPONSIVIDADE --- */
+        @media (max-width: 900px) {
+            .header { width: calc(100% - 30px); padding: 10px 20px; top: 15px; border-radius: 20px; }
+            .navbar { flex-direction: row; justify-content: space-between; height: auto; }
+            .menu-toggle { display: block; z-index: 1001; }
+            .nav-menu { 
+                display: none; 
+                flex-direction: column; 
+                position: absolute; 
+                top: 70px; 
+                left: 0; 
+                width: 100%; 
+                background: var(--bg-cinza); 
+                padding: 20px; 
+                box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+                border-radius: 20px; 
+                border: 1px solid #e2e8f0; 
+                text-align: center; 
+                gap: 15px; 
+                z-index: 1000; 
+            }
+            .nav-menu.active { display: flex; animation: slideDown 0.3s ease-out; }
+            .nav-menu a { color: var(--cor-primaria); margin: 0; font-size: 1rem; width: 100%; padding: 10px 0; border-bottom: 1px solid #e2e8f0; }
+            .nav-menu a:last-child { border-bottom: none; }
+            .social-icon { margin: 10px auto 0; color: var(--cor-primaria); display: inline-flex; width: fit-content; border: none; }
+            .pagina-hero { padding: 140px 20px 60px; }
+            .pagina-hero h1 { font-size: 2.2rem; }
+        }
+
+        @media (max-width: 768px) {
+            .mvv-grid { grid-template-columns: 1fr; gap: 30px; }
+            .footer-content { flex-direction: column; text-align: center; }
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="container navbar">
+        <a href="index.html" class="logo">
+            <img src="./imagens/logo.png" alt="S. Embalagens">
+        </a>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+
+        <nav class="nav-menu" id="navMenu">
+             <a href="index.html#catalogo">Catálogo de Produtos</a>
+             <a href="index.html#diferenciais">Compromisso</a>
+             <a href="missao-valores.html" style="color: var(--cor-destaque);">Missão e Valores</a>
+             <a href="index.html#parceiros">Clientes</a>
+             <a href="index.html#depoimentos">Feedbacks</a>
+             <a href="index.html#contato">Contato</a>
+             <a href="https://www.instagram.com/salesemb" target="_blank" class="social-icon" title="Siga-nos no Instagram">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                     <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                     <path d="M16.113 11.44a5 5 0 1 1-2.226-5.06M17.5 6.5h.01"></path>
+                 </svg>
+             </a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="pagina-hero">
+        <div class="container">
+            <h1>A Nossa Essência</h1>
+            <p>Conheça os princípios que guiam a Sales Embalagens todos os dias para entregar a melhor solução para o seu negócio.</p>
+        </div>
+    </section>
+
+    <section class="mvv-section">
+        <div class="container">
+            <div class="mvv-grid">
+                
+                <div class="mvv-card">
+                    <div class="mvv-icone">🎯</div>
+                    <h3>Missão</h3>
+                    <p>Entregar soluções em embalagens de papelão que ajudem nossos clientes a vender mais, proteger melhor seus produtos e operar com eficiência, combinando qualidade, agilidade e preço competitivo.</p>
+                </div>
+
+                <div class="mvv-card">
+                    <div class="mvv-icone">🔭</div>
+                    <h3>Visão</h3>
+                    <p>Ser referência no Nordeste como a empresa de embalagens mais confiável e estratégica para negócios B2B, com diferenciação na entrega, qualidade e um alto padrão de atendimento.</p>
+                </div>
+
+                <div class="mvv-card">
+                    <div class="mvv-icone">💎</div>
+                    <h3>Valores</h3>
+                    <ul class="valores-lista">
+                        <li>Foco no cliente: Atendemos focando em atender melhor as empresas para que elas possam vender mais e com maior valor agregado em seus produtos.</li>
+                        <li>Velocidade com responsabilidade: Prazo é compromisso. Agilidade sem perder qualidade.</li>
+                        <li>Relação ganha-ganha: Se não for bom para os dois lados, não faz sentido.</li>
+                        <li>Eficiência operacional: Preço competitivo vem de processo bem feito e processos bem desenhados.</li>
+                        <li>Qualidade consistente: Produto padronizado, entrega confiável e sem surpresa.</li>
+                        <li>Evolução constante: Estamos sempre melhorando — produto, processo, atendimento e experiência do cliente.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer id="footer" class="footer" style="padding: 40px 0; background: var(--cor-primaria);">
+    <div class="container footer-content">
+        <p style="margin: 0; color: #94a3b8;">&copy; 2026 S. Embalagens. Todos os direitos reservados. Fortaleza, CE.</p>
+        <div class="footer-social">
+            <a href="https://www.instagram.com/salesemb" target="_blank" aria-label="Siga-nos no Instagram">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                     <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                     <path d="M16.113 11.44a5 5 0 1 1-2.226-5.06M17.5 6.5h.01"></path>
+                 </svg>
+            </a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Menu Mobile e Links
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+    menuToggle.addEventListener('click', () => navMenu.classList.toggle('active'));
+    document.querySelectorAll('.nav-menu a').forEach(link => link.addEventListener('click', () => navMenu.classList.remove('active')));
+</script>
+</body>
+</html>

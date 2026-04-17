@@ -13,18 +13,41 @@
     <link rel="stylesheet" href="./output.css">
 
     <style>
+        /* --- ROLAGEM SUAVE (Para o novo menu) --- */
+        html { scroll-behavior: smooth; scroll-padding-top: 110px; }
+
         :root { --cor-primaria: #0f172a; --cor-destaque: #ea580c; --bg-cinza: #f8fafc; --fonte-titulo: 'Montserrat', sans-serif; }
         body { font-family: 'Inter', sans-serif; color: #334155; }
-        .header { background: #fff; padding: 15px 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 4px rgba(0,0,0,0.06); }
-        .navbar { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* --- NOVO HEADER FLUTUANTE --- */
+        .header { 
+            background: var(--bg-cinza); 
+            padding: 10px 30px; 
+            position: fixed; 
+            width: calc(100% - 40px);
+            max-width: 1200px;
+            top: 20px; 
+            left: 50%;
+            transform: translateX(-50%); 
+            z-index: 1000; 
+            border-radius: 50px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06); 
+            border: 1px solid rgba(255,255,255,0.8); 
+        }
+        .navbar { display: flex; justify-content: space-between; align-items: center; width: 100%; }
         
         /* Ajuste do Logotipo */
         .logo { text-decoration: none; display: flex; align-items: center; }
-        .logo img { height: 50px; width: auto; display: block; }
+        .logo img { height: 45px; width: auto; display: block; }
 
-        .nav-menu a { margin-left: 30px; color: #1e293b; font-weight: 600; text-decoration: none; }
+        .nav-menu { display: flex; align-items: center; }
+        .nav-menu a { margin-left: 30px; color: var(--cor-primaria); font-weight: 600; text-decoration: none; transition: color 0.3s; }
+        .nav-menu a:hover { color: var(--cor-destaque); }
+        .menu-toggle { display: none; background: none; border: none; color: var(--cor-primaria); cursor: pointer; padding: 5px; }
+
         .btn-novo { background: var(--cor-destaque); color: #fff; padding: 16px 35px; border-radius: 6px; font-weight: 700; text-transform: uppercase; text-decoration: none; display: inline-block; }
         
+        /* Layout Produto Detalhe */
         .produto-hero { padding: 160px 20px 80px; background: var(--bg-cinza); }
         .produto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1200px; margin: 0 auto; align-items: center; }
         .produto-info h1 { font-family: var(--fonte-titulo); font-size: 3rem; color: var(--cor-primaria); margin-bottom: 20px; line-height: 1.1; }
@@ -35,6 +58,7 @@
         .spec-item { background: #fff; padding: 20px; border-radius: 8px; border-left: 4px solid var(--cor-destaque); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .spec-item strong { display: block; color: var(--cor-primaria); font-size: 1.1rem; margin-bottom: 5px; }
         
+        /* Formulario B2B */
         .form-container { background: #fff; border-radius: 20px; padding: 50px 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); max-width: 800px; margin: -40px auto 80px; position: relative; z-index: 10; }
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 25px; }
         .form-group { display: flex; flex-direction: column; }
@@ -55,11 +79,30 @@
         /* ----------------------------------------------------------- */
         
         @media (max-width: 900px) {
-            .header { padding: 10px 0; }
-            .navbar { flex-direction: column; gap: 10px; }
-            .nav-menu { flex-wrap: wrap; justify-content: center; gap: 12px; }
-            .nav-menu a { margin-left: 0; font-size: 0.85rem; }
-            .social-icon { margin-left: 0; }
+            .header { width: calc(100% - 30px); padding: 10px 20px; top: 15px; border-radius: 20px; }
+            .navbar { flex-direction: row; justify-content: space-between; height: auto; }
+            .menu-toggle { display: block; z-index: 1001; }
+            
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--bg-cinza);
+                padding: 20px;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+                border-radius: 20px;
+                border: 1px solid #e2e8f0;
+                text-align: center;
+                gap: 15px;
+                z-index: 1000;
+            }
+            .nav-menu.active { display: flex; animation: slideDown 0.3s ease-out; }
+            .nav-menu a { margin: 0; font-size: 1rem; width: 100%; padding: 10px 0; border-bottom: 1px solid #e2e8f0; }
+            .nav-menu a:last-child { border-bottom: none; }
+            .social-icon { margin: 10px auto 0; display: inline-flex; width: fit-content; border: none; }
         }
 
         @media (max-width: 768px) {
@@ -74,18 +117,37 @@
 
             .footer-content { flex-direction: column; text-align: center; gap: 15px; padding: 10px 20px; }
         }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
 
 <header class="header">
-    <div class="navbar">
+    <div class="container navbar">
         <a href="index.html" class="logo">
             <img src="./imagens/logo.png" alt="S. Embalagens">
         </a>
-        <nav class="nav-menu" style="display: flex; align-items: center;">
-             <a href="index.html#catalogo">Voltar ao Catálogo</a>
-             <a href="https://www.instagram.com/salesemb" target="_blank" class="social-icon" aria-label="Siga-nos no Instagram" title="Siga-nos no Instagram">
+
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+
+        <nav class="nav-menu" id="navMenu">
+             <a href="index.html#catalogo">Catálogo de Produtos</a>
+             <a href="index.html#diferenciais">Compromisso</a>
+             <a href="missao-valores.html">Missão e Valores</a>
+             <a href="index.html#parceiros">Clientes</a>
+             <a href="index.html#depoimentos">Feedbacks</a>
+             <a href="index.html#contato">Contato</a>
+             <a href="https://www.instagram.com/salesemb" target="_blank" class="social-icon" title="Siga-nos no Instagram">
                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                      <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
                      <path d="M16.113 11.44a5 5 0 1 1-2.226-5.06M17.5 6.5h.01"></path>
@@ -160,6 +222,23 @@
         </div>
     </div>
 </footer>
+
+<script>
+    // Função para abrir e fechar o novo menu mobile
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+
+    menuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+    });
+
+    // Fecha o menu automaticamente quando clicar em um link
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+        });
+    });
+</script>
 
 </body>
 </html>

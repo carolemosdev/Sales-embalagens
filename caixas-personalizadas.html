@@ -13,19 +13,54 @@
     <link rel="stylesheet" href="./output.css">
 
     <style>
-        :root { --cor-primaria: #0f172a; --cor-destaque: #ea580c; --bg-cinza: #f8fafc; --fonte-titulo: 'Montserrat', sans-serif; }
-        body { font-family: 'Inter', sans-serif; color: #334155; }
-        .header { background: #fff; padding: 15px 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 4px rgba(0,0,0,0.06); }
-        .navbar { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        
-        /* Ajuste do Logotipo */
-        .logo { text-decoration: none; display: flex; align-items: center; }
-        .logo img { height: 50px; width: auto; display: block; }
+        /* --- ROLAGEM SUAVE --- */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 110px;
+        }
 
-        .nav-menu a { margin-left: 30px; color: #1e293b; font-weight: 600; text-decoration: none; }
-        .btn-novo { background: var(--cor-destaque); color: #fff; padding: 16px 35px; border-radius: 6px; font-weight: 700; text-transform: uppercase; text-decoration: none; display: inline-block; }
+        /* --- PALETA DE CORES DA EMPRESA --- */
+        :root { 
+            --cor-primaria: #061c41; 
+            --cor-destaque: #e30a21; 
+            --bg-cinza: #f8fafc; 
+            --fonte-titulo: 'Montserrat', sans-serif; 
+        }
         
-        /* Layout Produto Detalhe */
+        body { font-family: 'Inter', sans-serif; color: #334155; margin: 0; padding: 0; background-color: var(--bg-cinza); }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* --- HEADER E MENU FLUTUANTE --- */
+        .header { 
+            background: var(--bg-cinza); 
+            padding: 10px 30px; 
+            position: fixed; 
+            width: calc(100% - 40px);
+            max-width: 1200px;
+            top: 20px; 
+            left: 50%;
+            transform: translateX(-50%); 
+            z-index: 1000; 
+            border-radius: 50px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06); 
+            border: 1px solid rgba(255,255,255,0.8); 
+        }
+        
+        .navbar { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .logo { text-decoration: none; display: flex; align-items: center; }
+        .logo img { height: 45px; width: auto; display: block; }
+        
+        .nav-menu { display: flex; align-items: center; }
+        .nav-menu a { margin-left: 30px; color: var(--cor-primaria); font-weight: 600; text-decoration: none; transition: color 0.3s; }
+        .nav-menu a:hover { color: var(--cor-destaque); }
+        .menu-toggle { display: none; background: none; border: none; color: var(--cor-primaria); cursor: pointer; padding: 5px; }
+
+        /* --- BOTÕES E TAGS --- */
+        .btn-novo { background: var(--cor-destaque); color: #fff; padding: 16px 35px; border-radius: 8px; font-weight: 700; text-transform: uppercase; text-decoration: none; display: inline-block; transition: 0.3s; cursor: pointer; font-family: var(--fonte-titulo); border: none; width: 100%; text-align: center; }
+        .btn-novo:hover { background: var(--cor-primaria); transform: translateY(-2px); }
+
+        /* --- LAYOUT PRODUTO DETALHE --- */
         .produto-hero { padding: 160px 20px 80px; background: var(--bg-cinza); }
         .produto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1200px; margin: 0 auto; align-items: center; }
         .produto-info h1 { font-family: var(--fonte-titulo); font-size: 3rem; color: var(--cor-primaria); margin-bottom: 20px; line-height: 1.1; }
@@ -35,53 +70,42 @@
         .specs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 40px; }
         .spec-item { background: #fff; padding: 20px; border-radius: 8px; border-left: 4px solid var(--cor-destaque); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .spec-item strong { display: block; color: var(--cor-primaria); font-size: 1.1rem; margin-bottom: 5px; }
-        
-        /* Formulario B2B */
+
+        /* --- DEPOIMENTOS --- */
+        .section-title { font-family: var(--fonte-titulo); font-size: 2.5rem; color: var(--cor-primaria); text-align: center; margin-bottom: 50px; }
+        .card-depoimento { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; display: flex; flex-direction: column; text-align: left; }
+        .estrelas { color: #f59e0b; font-size: 1.4rem; margin-bottom: 15px; letter-spacing: 2px; }
+        .texto-depoimento { font-style: italic; color: #475569; margin-bottom: 25px; line-height: 1.6; flex-grow: 1; }
+        .cliente-foto { width: 100%; height: 250px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; }
+        .cliente-info-box strong { display: block; color: var(--cor-primaria); font-size: 1.05rem; }
+        .cliente-info-box span { color: #64748b; font-size: 0.9rem; }
+
+        /* --- FORMULÁRIO B2B --- */
         .form-container { background: #fff; border-radius: 20px; padding: 50px 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); max-width: 800px; margin: -40px auto 80px; position: relative; z-index: 10; }
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 25px; }
-        .form-group { display: flex; flex-direction: column; }
+        .form-group { display: flex; flex-direction: column; text-align: left;}
         .full-width { grid-column: 1 / -1; }
-        .form-label { font-weight: 600; color: var(--cor-primaria); margin-bottom: 5px; }
-        .form-input { border: none; border-bottom: 2px solid #881337; padding: 10px 0; font-family: 'Inter'; font-size: 1rem; background: transparent; transition: border-color 0.3s; }
+        .form-label { font-weight: 600; color: var(--cor-primaria); margin-bottom: 5px; font-size: 0.95rem;}
+        .form-input { border: none; border-bottom: 2px solid #cbd5e1; padding: 10px 0; font-family: 'Inter', sans-serif; font-size: 1rem; background: transparent; transition: border-color 0.3s; color: #334155; }
         .form-input:focus { outline: none; border-bottom-color: var(--cor-destaque); }
-        
-        /* --- ESTILOS DO INSTAGRAM --- */
+
+        /* --- REDES SOCIAIS E FOOTER --- */
         .social-icon { display: inline-flex; align-items: center; justify-content: center; color: var(--cor-primaria); transition: color 0.3s ease, transform 0.3s ease; margin-left: 30px; vertical-align: middle; }
-        .social-icon:hover { color: #E1306C; transform: scale(1.15); }
+        .social-icon:hover { color: var(--cor-destaque); transform: scale(1.15); }
         .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        .footer-social a { color: #94a3b8; transition: color 0.3s ease, transform 0.3s ease; display: inline-block; }
-        .footer-social a:hover { color: #E1306C; transform: scale(1.15); }
+        .footer-social a { color: #fff; transition: 0.3s; display: inline-block; opacity: 0.8; }
+        .footer-social a:hover { color: var(--cor-destaque); transform: scale(1.15); opacity: 1; }
 
-        /* --- MENU HAMBÚRGUER --- */
-        .menu-toggle { display: none; background: none; border: none; color: var(--cor-primaria); cursor: pointer; padding: 5px; }
-
-        /* ----------------------------------------------------------- */
-        /* --- RESPONSIVIDADE COMPLETA --- */
-        /* ----------------------------------------------------------- */
-        
+        /* --- RESPONSIVIDADE --- */
         @media (max-width: 900px) {
-            .navbar { flex-direction: row; justify-content: space-between; padding: 0 20px; height: 70px; }
+            .header { width: calc(100% - 30px); padding: 10px 20px; top: 15px; border-radius: 20px; }
+            .navbar { flex-direction: row; justify-content: space-between; height: auto; }
             .menu-toggle { display: block; z-index: 1001; }
-
-            .nav-menu {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                background: #ffffff;
-                padding: 20px;
-                box-shadow: 0 10px 15px rgba(0,0,0,0.1);
-                border-top: 1px solid #eee;
-                text-align: center;
-                gap: 20px;
-                z-index: 1000;
-            }
-
+            .nav-menu { display: none; flex-direction: column; position: absolute; top: 70px; left: 0; width: 100%; background: var(--bg-cinza); padding: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-radius: 20px; border: 1px solid #e2e8f0; text-align: center; gap: 15px; z-index: 1000; }
             .nav-menu.active { display: flex; animation: slideDown 0.3s ease-out; }
-            .nav-menu a { margin: 0; font-size: 1rem; width: 100%; padding: 10px 0; border-bottom: 1px solid #f8fafc; }
-            .social-icon { margin: 10px auto 0; }
+            .nav-menu a { color: var(--cor-primaria); margin: 0; font-size: 1rem; width: 100%; padding: 10px 0; border-bottom: 1px solid #e2e8f0; }
+            .nav-menu a:last-child { border-bottom: none; }
+            .social-icon { margin: 10px auto 0; color: var(--cor-primaria); display: inline-flex; width: fit-content; border: none; }
         }
 
         @media (max-width: 768px) {
@@ -90,12 +114,9 @@
             .produto-info h1 { font-size: 2.2rem; }
             .specs-grid { grid-template-columns: 1fr; gap: 15px; text-align: left; }
             .produto-imagem img { max-width: 100%; margin: 0 auto; }
-
             .form-container { padding: 40px 20px 30px; margin-top: 40px; border-radius: 12px; }
             .form-grid { grid-template-columns: 1fr; gap: 20px; }
-            .form-titulo-flutuante { font-size: 1rem; padding: 10px 20px; width: 90%; text-align: center; white-space: normal; top: -30px; }
-
-            .footer-content { flex-direction: column; text-align: center; gap: 15px; padding: 10px 20px; }
+            .footer-content { flex-direction: column; text-align: center; }
         }
 
         @keyframes slideDown {
@@ -107,7 +128,7 @@
 <body>
 
 <header class="header">
-    <div class="navbar">
+    <div class="navbar container">
         <a href="index.html" class="logo">
             <img src="./imagens/logo.png" alt="S. Embalagens">
         </a>
@@ -121,7 +142,12 @@
         </button>
 
         <nav class="nav-menu" id="navMenu">
-             <a href="index.html#catalogo">Voltar ao Catálogo</a>
+             <a href="index.html#catalogo">Catálogo de Produtos</a>
+             <a href="index.html#diferenciais">Compromisso</a>
+             <a href="missao-valores.html">Missão e Valores</a>
+             <a href="index.html#parceiros">Clientes</a>
+             <a href="index.html#depoimentos">Feedbacks</a>
+             <a href="index.html#contato">Contato</a>
              <a href="https://www.instagram.com/salesemb" target="_blank" class="social-icon" title="Siga-nos no Instagram">
                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                      <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
@@ -161,8 +187,49 @@
         </div>
     </section>
 
-    <section style="background: #ffffff; padding: 0 20px;">
-        <div class="form-container">
+    <section id="depoimentos" style="padding: 60px 0; background-color: var(--bg-cinza);">
+        <div class="container text-center">
+            <span style="color: var(--cor-destaque); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem; display: block; margin-bottom: 10px;">FEEDBACKS</span>
+            <h2 class="section-title">O que nossos clientes dizem</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; text-align: left;">
+                
+                <div class="card-depoimento">
+                    <div class="estrelas">★★★★★</div>
+                    <p class="texto-depoimento">"Compramos pela 1ª vez com a S e conseguimos padronizar e otimizar nossa operação logística!"</p>
+                    <img src="./imagens/naldo.jpeg" alt="Naldo Silva" class="cliente-foto">
+                    <div class="cliente-info-box">
+                        <strong>Naldo Silva</strong>
+                        <span>Grupo Acripel</span>
+                    </div>
+                </div>
+
+                <div class="card-depoimento">
+                    <div class="estrelas">★★★★★</div>
+                    <p class="texto-depoimento">"Consegui reduzir o preço dos meus insumos em até 20%, o que me ajudou a fechar com mais clientes."</p>
+                    <img src="./imagens/antonio.jpeg" alt="Antonio Edval" class="cliente-foto">
+                    <div class="cliente-info-box">
+                        <strong>Antonio Edval</strong>
+                        <span>Edmil Embalagens</span>
+                    </div>
+                </div>
+
+                <div class="card-depoimento">
+                    <div class="estrelas">★★★★★</div>
+                    <p class="texto-depoimento">"Com a S consigo comprar embalagens com preço de fábrica e ganhar licitações públicas."</p>
+                    <img src="./imagens/renan.jpeg" alt="Renan Linhares" class="cliente-foto">
+                    <div class="cliente-info-box">
+                        <strong>Renan Linhares</strong>
+                        <span>RL Representações</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section style="background: #ffffff; padding: 60px 20px;">
+        <div class="form-container" style="margin: 0 auto;">
             <h2 style="font-family: var(--fonte-titulo); text-align: center; color: var(--cor-primaria); margin-bottom: 30px; font-size: 2rem;">Solicite um Orçamento Rápido</h2>
             <p style="text-align: center; margin-bottom: 30px; color: #64748b;">Envie as medidas (C × L × A), tipo de produto a ser transportado e o peso máximo.</p>
             
@@ -177,16 +244,15 @@
                         <textarea class="form-input" rows="3" placeholder="Ex: 30x20x15, peças de roupa, até 5kg."></textarea>
                     </div>
                 </div>
-                <button type="submit" class="btn-novo" style="width: 100%; border-radius: 8px;">Enviar Solicitação</button>
+                <button type="submit" class="btn-novo">Enviar Solicitação</button>
             </form>
         </div>
     </section>
 </main>
 
-<footer style="background: #0f172a; color: #94a3b8; padding: 30px 0; font-size: 0.9rem;">
+<footer style="background: var(--cor-primaria); color: #94a3b8; padding: 40px 0; font-size: 0.9rem;">
     <div class="footer-content">
         <p style="margin: 0;">&copy; 2026 S. Embalagens. Todos os direitos reservados.</p>
-        
         <div class="footer-social">
             <a href="https://www.instagram.com/salesemb" target="_blank" aria-label="Siga-nos no Instagram" title="Siga-nos no Instagram">
                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
