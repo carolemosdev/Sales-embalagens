@@ -12,186 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="./output.css">
-
-    <style>
-        /* --- ROLAGEM SUAVE --- */
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 110px; /* Ajustado para o novo cabeçalho flutuante */
-        }
-
-        /* --- PALETA DE CORES DA EMPRESA --- */
-        :root { 
-            --cor-primaria: #061c41; /* Azul Marinho da Logo/Footer */
-            --cor-destaque: #e30a21; /* Vermelho Vibrante do "S" */
-            --bg-cinza: #f8fafc; 
-            --fonte-titulo: 'Montserrat', sans-serif; 
-        }
-        
-        body { font-family: 'Inter', sans-serif; color: #334155; margin: 0; padding: 0; background-color: var(--bg-cinza); }
-        
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        
-        /* --- HEADER E MENU (ESTILO CÁPSULA FLUTUANTE) --- */
-        .header { 
-            background: var(--bg-cinza); 
-            padding: 10px 30px; 
-            position: fixed; 
-            width: calc(100% - 40px); /* Dá espaço nas laterais */
-            max-width: 1200px;
-            top: 20px; /* Descola do topo */
-            left: 50%;
-            transform: translateX(-50%); /* Centraliza perfeitamente */
-            z-index: 1000; 
-            border-radius: 50px; /* Arredonda completamente as pontas */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06); /* Sombra suave para flutuar */
-            border: 1px solid rgba(255,255,255,0.8); /* Efeito sutil nas bordas */
-        }
-        
-        .navbar { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-        .logo { text-decoration: none; display: flex; align-items: center; }
-        .logo img { height: 45px; width: auto; display: block; }
-        
-        .nav-menu { display: flex; align-items: center; }
-        .nav-menu a { margin-left: 30px; color: var(--cor-primaria); font-weight: 600; text-decoration: none; transition: color 0.3s; }
-        .nav-menu a:hover { color: var(--cor-destaque); }
-        .menu-toggle { display: none; background: none; border: none; color: var(--cor-primaria); cursor: pointer; padding: 5px; }
-
-        /* --- BOTÕES E TAGS --- */
-        .btn-novo { background: var(--cor-destaque); color: #fff; padding: 16px 35px; border-radius: 6px; font-weight: 700; text-transform: uppercase; text-decoration: none; display: inline-block; transition: 0.3s; }
-        .btn-novo:hover { background: var(--cor-primaria); transform: translateY(-2px); }
-        .tag-destaque { background: #eff6ff; color: #1d4ed8; font-size: 0.8rem; font-weight: 700; padding: 4px 10px; border-radius: 20px; display: inline-block; margin-bottom: 15px; align-self: flex-start; position: relative; z-index: 2; }
-        .tag-frete { background: #ecfdf5; color: #047857; }
-
-        /* --- HERO E SEÇÕES --- */
-        .hero-novo-design { padding-top: 150px; padding-bottom: 60px; background: var(--bg-cinza); }
-        .hero-container-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 50px; }
-        .hero-content-novo { flex: 1; }
-        .tagline-principal { color: var(--cor-destaque); font-weight: 700; letter-spacing: 2px; font-size: 0.9rem; text-transform: uppercase; }
-        .titulo-principal-hero { font-family: var(--fonte-titulo); font-size: 3.5rem; color: var(--cor-primaria); line-height: 1.1; margin: 15px 0; }
-        .descricao-hero { font-size: 1.1rem; color: #64748b; margin-bottom: 30px; line-height: 1.6; }
-        .hero-imagem-fundo { flex: 1; display: flex; align-items: center; justify-content: center; }
-        .hero-imagem-fundo img { width: 100%; height: auto; object-fit: cover; aspect-ratio: 4 / 3; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); display: block; }
-        
-        .section-title { font-family: var(--fonte-titulo); font-size: 2.5rem; color: var(--cor-primaria); text-align: center; margin-bottom: 50px; }
-
-        /* --- CATÁLOGO --- */
-        .catalogo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .card-catalogo { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; transition: all 0.3s ease; display: flex; flex-direction: column; position: relative; }
-        .card-catalogo:hover { box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-color: var(--cor-primaria); transform: translateY(-5px); }
-        .card-link-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
-        .card-catalogo img { width: 100%; height: 260px; object-fit: contain; background: #f1f5f9; border-bottom: 1px solid #e2e8f0; display: block; }
-        .card-conteudo { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
-        .lista-specs { list-style: none; padding: 0; margin: 15px 0; font-size: 0.9rem; color: #475569; }
-        .lista-specs li { margin-bottom: 5px; padding-left: 15px; position: relative; }
-        .lista-specs li::before { content: "•"; color: var(--cor-destaque); position: absolute; left: 0; font-weight: bold; }
-        .pedido-minimo { margin-top: auto; font-weight: 700; color: var(--cor-primaria); padding-top: 15px; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2; }
-        .btn-produto { position: relative; z-index: 3; cursor: pointer; background: none; border: none; color: var(--cor-destaque); font-family: 'Inter'; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; padding: 5px 15px; transition: 0.3s; }
-        .btn-produto:hover { background: #fff1f2; border-radius: 4px; }
-
-        /* --- DIFERENCIAIS --- */
-        .card-diferencial { background: #fff; border: 1px solid #e2e8f0; padding: 40px 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: 0.3s; }
-        .card-diferencial:hover { border-color: var(--cor-destaque); transform: translateY(-5px); }
-        
-        /* --- CARROSSEL DE PARCEIROS (ATUALIZADO: Rápido e Cores Reais) --- */
-        .marquee-container { overflow: hidden; width: 100%; padding: 40px 0; background: #fff; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; display: flex; position: relative; }
-        .marquee-track { display: flex; width: max-content; animation: scrollMarquee 20s linear infinite; } /* Mudado de 35s para 20s */
-        .marquee-track img { height: 50px; margin: 0 40px; object-fit: contain; transition: all 0.3s ease; flex-shrink: 0; } /* Retirado o grayscale e opacity */
-        .marquee-track img:hover { transform: scale(1.1); }
-        @keyframes scrollMarquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        .marquee-container:hover .marquee-track { animation-play-state: paused; }
-
-        /* --- DEPOIMENTOS (CORRIGIDO PARA FOTO GRANDE) --- */
-        .card-depoimento { background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; display: flex; flex-direction: column; text-align: left; }
-        .estrelas { color: #f59e0b; font-size: 1.4rem; margin-bottom: 15px; letter-spacing: 2px; }
-        .texto-depoimento { font-style: italic; color: #475569; margin-bottom: 25px; line-height: 1.6; flex-grow: 1; }
-        .cliente-foto { width: 100%; height: 250px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; }
-        .cliente-info-box strong { display: block; color: var(--cor-primaria); font-size: 1.05rem; }
-        .cliente-info-box span { color: #64748b; font-size: 0.9rem; }
-
-        /* --- CONTATO E FORMULÁRIO --- */
-        .contato-wrapper { display: flex; justify-content: center; padding: 80px 20px; background-color: var(--bg-cinza); position: relative; }
-        .form-container { background: #fff; border-radius: 20px; padding: 50px 40px 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); width: 100%; max-width: 600px; position: relative; margin-top: 30px; }
-        .form-titulo-flutuante { position: absolute; top: -25px; left: 50%; transform: translateX(-50%); background: var(--cor-primaria); color: #fff; padding: 12px 40px; border-radius: 10px; font-family: var(--fonte-titulo); font-size: 1.2rem; font-weight: 700; white-space: nowrap; box-shadow: 0 8px 20px rgba(6, 28, 65, 0.4); }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 25px; }
-        .form-group { display: flex; flex-direction: column; text-align: left; }
-        .form-group.full-width { grid-column: 1 / -1; }
-        .form-label { font-weight: 600; color: var(--cor-primaria); margin-bottom: 5px; font-size: 0.95rem; }
-        .form-label span { color: var(--cor-destaque); margin-left: 3px; }
-        .form-input { border: none; border-bottom: 2px solid #cbd5e1; padding: 10px 0; font-family: 'Inter', sans-serif; font-size: 1rem; color: #334155; background: transparent; transition: border-color 0.3s; width: 100%; }
-        .form-input:focus { outline: none; border-bottom-color: var(--cor-destaque); }
-        textarea.form-input { resize: vertical; min-height: 40px; }
-        
-        .btn-enviar-form { width: 100%; background: var(--cor-destaque); color: #fff; padding: 16px; border: none; border-radius: 8px; font-family: var(--fonte-titulo); font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; display: flex; justify-content: center; align-items: center; gap: 10px; }
-        .btn-enviar-form:hover { background: var(--cor-primaria); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(227, 10, 33, 0.3); }
-
-        /* --- MODAL LEADSTER --- */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(6, 28, 65, 0.8); z-index: 2000; display: none; justify-content: center; align-items: center; padding: 20px; backdrop-filter: blur(5px); }
-        .modal-box { background: #fff; border-radius: 16px; padding: 40px 30px; width: 100%; max-width: 450px; position: relative; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); animation: modalFadeIn 0.3s ease; }
-        .modal-close { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 2rem; color: #94a3b8; cursor: pointer; transition: color 0.2s; line-height: 1; }
-        .modal-close:hover { color: var(--cor-destaque); }
-        @keyframes modalFadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        select.form-input { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e30a21' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 5px center; background-size: 1.2em; padding-right: 30px; }
-        
-        .btn-leadster { background: var(--cor-destaque); color: #fff; padding: 14px; border-radius: 8px; font-weight: 700; width: 100%; border: none; cursor: pointer; transition: 0.3s; display: flex; justify-content: center; align-items: center; gap: 10px; font-size: 1.05rem; }
-        .btn-leadster:hover { background: var(--cor-primaria); transform: translateY(-2px); }
-        
-        /* --- REDES SOCIAIS E FOOTER --- */
-        .social-icon { display: inline-flex; align-items: center; justify-content: center; color: var(--cor-primaria); transition: color 0.3s ease, transform 0.3s ease; margin-left: 30px; vertical-align: middle; }
-        .social-icon:hover { color: var(--cor-destaque); transform: scale(1.15); }
-        .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
-        .footer-social a { color: #fff; transition: color 0.3s ease, transform 0.3s ease; display: inline-block; opacity: 0.8; }
-        .footer-social a:hover { color: var(--cor-destaque); transform: scale(1.15); opacity: 1; }
-
-        /* ----------------------------------------------------------- */
-        /* --- RESPONSIVIDADE COMPLETA (MOBILES E TABLETS) --- */
-        /* ----------------------------------------------------------- */
-        @media (max-width: 900px) {
-            .header { width: calc(100% - 30px); padding: 10px 20px; top: 15px; border-radius: 20px; }
-            .navbar { flex-direction: row; justify-content: space-between; height: auto; }
-            .menu-toggle { display: block; z-index: 1001; }
-            
-            .nav-menu {
-                display: none; 
-                flex-direction: column;
-                position: absolute;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                background: var(--bg-cinza);
-                padding: 20px;
-                box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-                border-radius: 20px;
-                border: 1px solid #e2e8f0;
-                text-align: center;
-                gap: 15px;
-                z-index: 1000;
-            }
-            .nav-menu.active { display: flex; animation: slideDown 0.3s ease-out; }
-            .nav-menu a { color: var(--cor-primaria); margin: 0; font-size: 1rem; width: 100%; padding: 10px 0; border-bottom: 1px solid #e2e8f0; }
-            .nav-menu a:last-child { border-bottom: none; }
-            .social-icon { margin: 10px auto 0; color: var(--cor-primaria); display: inline-flex; width: fit-content; border: none; }
-            
-            .hero-novo-design { padding-top: 130px; text-align: center; }
-            .hero-container-grid { grid-template-columns: 1fr; gap: 30px; }
-            .titulo-principal-hero { font-size: 2.2rem; }
-            .hero-imagem-fundo img { max-width: 100%; height: auto; }
-            .modal-box { margin: 15px; padding: 30px 20px; }
-        }
-
-        @media (max-width: 768px) {
-            .form-container { padding: 40px 20px 30px; margin-top: 40px; }
-            .form-grid { grid-template-columns: 1fr; gap: 20px; }
-            .form-titulo-flutuante { font-size: 1rem; padding: 10px 20px; width: 90%; text-align: center; white-space: normal; top: -30px; }
-            .footer-content { flex-direction: column; text-align: center; }
-            .section-title { font-size: 2rem; margin-bottom: 30px; }
-        }
-
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
 </head>
 <body>
 
@@ -232,11 +52,11 @@
             <div class="hero-content-novo">
                 <span class="tagline-principal">SUA OPERAÇÃO NÃO PODE PARAR</span>
                 <h1 class="titulo-principal-hero">Soluções completas em embalagens.</h1>
-                <p class="descricao-hero">A melhor solução em embalagens para o seu negócio.Caixas de papelão, chapas, papelão ondulado e caixas de pizza. Atendemos Indústrias, distribuidoras, comércios, gráficas, e-commerces e restaurantes com qualidade, atendimento ágil e preço de fábrica.</p>
+                <p class="descricao-hero">A melhor solução em embalagens para o seu negócio. Caixas de papelão, chapas, papelão ondulado e caixas de pizza. Atendemos Indústrias, distribuidoras, comércios, gráficas, e-commerces e restaurantes com qualidade, atendimento ágil e preço de fábrica.</p>
                 <a href="#catalogo" class="btn-novo">Ver Catálogo Completo</a>
             </div>
             <div class="hero-imagem-fundo">
-                <img src="./imagens/premium_photo-1765626650884-6ea199d953e4.avif" alt="Caixas de papelão personalizadas" style="object-fit: cover;">
+                <img src="./imagens/caixas.png" alt="Caixas de papelão e insumos de embalagem">
             </div>
         </div>
     </section>
@@ -251,87 +71,104 @@
                     <a href="caixas-personalizadas.html" class="card-link-overlay"></a>
                     <img src="./imagens/01.png" alt="Caixas de Papelão Personalizadas">
                     <div class="card-conteudo">
-                        <span class="tag-destaque" style="background: #fee2e2; color: #b91c1c;">⁠Frete grátis para Fortaleza e Região metropolitana.</span>
-                        <h3 style="font-size: 1.25rem; font-family: var(--fonte-titulo); color: var(--cor-primaria);">Caixas Personalizadas</h3>
+                        <h3>Caixas Personalizadas</h3>
+                        <p style="font-size: 0.9rem; color: #64748b;">Opção ideal para sua marca.</p>
                         <ul class="lista-specs">
                             <li>Ondas: B, C e B/C</li>
                             <li>Cores: Parda e Parda/Branca</li>
                             <li>Impressões em 2 cores</li>
+                            <li>⁠Frete grátis para Fortaleza e Região metropolitana.</li>
                         </ul>
                         <div class="pedido-minimo">
                             <span>Mínimo: 500 un</span>
-                            <button onclick="abrirOrcamento(event, 'Caixas de Papelão Personalizadas', '500 unidades')" class="btn-produto">Orçar</button>
+                            <button onclick="abrirOrcamento(event, 'Caixas de Papelão Personalizadas', '500 unidades')" class="btn-produto">ORÇAR</button>
                         </div>
                     </div>
+                    <button onclick="simular(event)" class="btn-simular-full">SIMULE AQUI &rarr;</button>
                 </div>
 
                 <div class="card-catalogo">
                     <a href="caixas-pizza.html" class="card-link-overlay"></a>
+                    <img src="./imagens/03.png" alt="Caixas de Pizza Personalizadas">
                     <div class="card-conteudo">
-                        <img src="./imagens/03.png" alt="Caixas de Pizza Personalizadas" style="border-bottom: none; margin-bottom: 20px;">
-                        <h3 style="font-size: 1.25rem; font-family: var(--fonte-titulo); color: var(--cor-primaria);">Caixas de Pizza</h3>
+                        <span class="tag-destaque" style="opacity: 0; visibility: hidden;">Espaçador</span>
+                        <h3>Caixas de Pizza</h3>
                         <ul class="lista-specs">
-                         <li>Formatos: Oitavada, quadrada e sextavada</li>
+                            <li>Formatos: Oitavada, quadrada e sextavada</li>
                             <li>Tamanhos: K20, K25, K30, K35, K40 e K45.</li>
                             <li>Impressão em Tela/Clichê em até 2 cores. Em offset 4 cores ou +.</li>
                             <li>Frete grátis para Fortaleza e Região metropolitana.</li>
                         </ul>
                         <div class="pedido-minimo">
                             <span>Mínimo: 500 un</span>
-                            <button onclick="abrirOrcamento(event, 'Caixas de Pizza Personalizadas', '500 unidades')" class="btn-produto">Orçar</button>
+                            <button onclick="abrirOrcamento(event, 'Caixas de Pizza Personalizadas', '500 unidades')" class="btn-produto">ORÇAR</button>
                         </div>
                     </div>
+                    <button onclick="simular(event)" class="btn-simular-full">SIMULE AQUI &rarr;</button>
                 </div>
                  
                 <div class="card-catalogo">
+                    <a href="caixas-pronta-entrega.html" class="card-link-overlay"></a>
                     <img src="./imagens/02.png" alt="Caixas à Pronta Entrega">
                     <div class="card-conteudo">
-                        <span class="tag-destaque" style="background: #fee2e2; color: #b91c1c;">Rápido</span>
-                        <h3 style="font-size: 1.25rem; font-family: var(--fonte-titulo); color: var(--cor-primaria);">Caixas à Pronta Entrega</h3>
-                        <p style="font-size: 0.9rem; color: #64748b; margin-top: 5px;">Mais rápido, em até 2 dias úteis.</p>
-                        <p style="font-size: 0.9rem; color: #64748b; margin-top: 5px;">Frete grátis: Acima de 200unid.</p>
+                        <h3>Caixas à Pronta Entrega</h3>
+                        <ul class="lista-specs">
+                            <li>Mais rápido, em até 2 dias úteis.</li>
+                            <li>Frete grátis: Acima de 200unid.</li>
+                        </ul>
                         <div class="pedido-minimo">
                             <span>Mínimo: 100 un</span>
-                            <button onclick="abrirOrcamento(event, 'Caixas à Pronta Entrega', '100 unidades')" class="btn-produto">Orçar</button>
+                            <button onclick="abrirOrcamento(event, 'Caixas à Pronta Entrega', '100 unidades', listaProntaEntrega)" class="btn-produto">ORÇAR</button>
                         </div>
                     </div>
+                    <button onclick="simular(event)" class="btn-simular-full">SIMULE AQUI &rarr;</button>
                 </div>
 
                  <div class="card-catalogo">
+                    <a href="caixas-mudanca.html" class="card-link-overlay"></a>
                     <img src="./imagens/04.png" alt="Caixas para Mudança">
                     <div class="card-conteudo">
-                        <h3 style="font-size: 1.25rem; font-family: var(--fonte-titulo); color: var(--cor-primaria);">Caixas para Mudança</h3>
-                        <p style="font-size: 0.9rem; color: #64748b;">Caixas simples ou reforçadas.</p>
-                        <p style="font-size: 0.9rem; color: #64748b;">À Pronta Entrega.</p>
-                        <p style="font-size: 0.9rem; color: #64748b;">Frete grátis para Fortaleza.</p>
-                        <p style="font-size: 0.9rem; color: #64748b;">Plástico Bolha e Fitas disponíveis.</p>
+                        <span class="tag-destaque" style="opacity: 0; visibility: hidden;">Espaçador</span>
+                        <h3>Caixas para Mudança</h3>
+                        <ul class="lista-specs">
+                            <li>Caixas simples ou reforçadas.</li>
+                            <li>À Pronta Entrega.</li>
+                            <li>Frete grátis para Fortaleza.</li>
+                            <li>Plástico Bolha e Fitas disponíveis.</li>
+                        </ul>
                         <div class="pedido-minimo">
                             <span>Mínimo: 10 un</span>
-                            <button onclick="abrirOrcamento(event, 'Caixas para Mudança', '10 unidades')" class="btn-produto">Orçar</button>
+                            <button onclick="abrirOrcamento(event, 'Caixas para Mudança', '10 unidades', listaMudanca, adicionaisMudanca)" class="btn-produto">ORÇAR</button>
                         </div>
                     </div>
+                    <button onclick="simular(event)" class="btn-simular-full">SIMULE AQUI &rarr;</button>
                 </div>
 
-                    <div class="card-catalogo">
+                <div class="card-catalogo">
+                    <a href="chapas-papelao.html" class="card-link-overlay"></a>
                     <img src="./imagens/05.png" alt="Chapas de Papelão">
                     <div class="card-conteudo">
-                        <h3 style="font-size: 1.25rem; font-family: var(--fonte-titulo); color: var(--cor-primaria);">Chapas de Papelão</h3>
+                        <span class="tag-destaque" style="opacity: 0; visibility: hidden;">Espaçador</span>
+                        <h3>Chapas de Papelão</h3>
                         <ul class="lista-specs">
                             <li>Tamanho Personalizado</li>
-                            <li>- ⁠Ondas B, C e BC (Duplas)</li>
+                            <li>Ondas B, C e BC (Duplas)</li>
                             <li>Preço direto de fábrica</li>
                         </ul>
                         <div class="pedido-minimo">
                             <span>Mínimo: 2000 un</span>
-                            <button onclick="abrirOrcamento(event, 'Chapas de Papelão', '2000 unidades')" class="btn-produto">Orçar</button>
+                            <button onclick="abrirOrcamento(event, 'Chapas de Papelão', '2000 unidades')" class="btn-produto">ORÇAR</button>
                         </div>
                     </div>
+                    <button onclick="simular(event)" class="btn-simular-full">SIMULE AQUI &rarr;</button>
                 </div>
 
                 <div class="card-catalogo">
+                    <a href="bobinas-simplex.html" class="card-link-overlay"></a>
                     <img src="./imagens/06.png" alt="Papelão Ondulado (Simplex)">
                     <div class="card-conteudo">
-                        <h3 style="font-size: 1.25rem; font-family: var(--fonte-titulo); color: var(--cor-primaria);">Bobinas Ondulado (Simplex)</h3>
+                        <span class="tag-destaque" style="opacity: 0; visibility: hidden;">Espaçador</span>
+                        <h3>Bobinas Ondulado</h3>
                         <ul class="lista-specs">
                             <li>Larguras: 1000mm ou 1200mm</li>
                             <li>Bobinas de: em média 50kgs</li>
@@ -340,48 +177,54 @@
                         </ul>
                         <div class="pedido-minimo">
                             <span>Mínimo: 2 un</span>
-                            <button onclick="abrirOrcamento(event, 'Papelão Ondulado (Simplex)', '2 unidades')" class="btn-produto">Orçar</button>
+                            <button onclick="abrirOrcamento(event, 'Papelão Ondulado (Simplex)', '2 unidades')" class="btn-produto">ORÇAR</button>
                         </div>
                     </div>
+                    <button onclick="simular(event)" class="btn-simular-full">SIMULE AQUI &rarr;</button>
                 </div>
 
-
                 <div class="card-catalogo">
+                    <a href="papelao-micro-ondulado.html" class="card-link-overlay"></a>
                     <img src="./imagens/01-papelão-micro-ondulado.png" alt="Papelão Micro Ondulado">
                     <div class="card-conteudo">
-                        <h3 style="font-size: 1.25rem; font-family: var(--fonte-titulo); color: var(--cor-primaria);">Papelão Micro-Ondulado</h3>
+                        <span class="tag-destaque" style="opacity: 0; visibility: hidden;">Espaçador</span>
+                        <h3>Papelão Micro-Ondulado</h3>
                         <p style="font-size: 0.9rem; color: #64748b;">Opção ideal para Gráficas.</p>
                         <ul class="lista-specs">
-                            <li>Onda "E" permite embalagens com encaixes mais precisos e com qualidade.</li>
+                            <li>Onda "E" permite encaixes mais precisos.</li>
                             <li>Larguras: 350mm a 1350mm</li>
                             <li>Cores: Parda, Parda/Branca</li>
-                            <li>Frete Grátis: Para Fortaleza e Região.</li>
+                            <li>Frete Grátis para Fortaleza e Região.</li>
                         </ul>                        
                         <div class="pedido-minimo">
                             <span>Mínimo: 500kg</span>
-                            <button onclick="abrirOrcamento(event, 'Papelão Micro-Ondulado', '500kg')" class="btn-produto">Orçar</button>
+                            <button onclick="abrirOrcamento(event, 'Papelão Micro-Ondulado', '500kg')" class="btn-produto">ORÇAR</button>
                         </div>
                     </div>
+                    <button onclick="simular(event)" class="btn-simular-full">SIMULE AQUI &rarr;</button>
                 </div>
 
                 <div class="card-catalogo">
+                    <a href="fita-adesiva.html" class="card-link-overlay"></a>
                     <img src="./imagens/02-fita-adesiva.png" alt="Fita Adesiva">
                     <div class="card-conteudo">
-                        <h3 style="font-size: 1.25rem; font-family: var(--fonte-titulo); color: var(--cor-primaria);">Fita Adesiva</h3>
+                        <span class="tag-destaque" style="opacity: 0; visibility: hidden;">Espaçador</span>
+                        <h3>Fita Adesiva</h3>
                         <p style="font-size: 0.9rem; color: #64748b;">Aderência forte para embalagens seguras e confiáveis.</p>
                          <ul class="lista-specs">
                             <li>Formato: 45mm x 100m</li>
-                            <li>Frete Grátis: Para 1 caixa(80 Fitas)</li>
+                            <li>Frete Grátis: Para 1 caixa (80 Fitas)</li>
                         </ul>                        
                         <div class="pedido-minimo">
                             <span>Mínimo: 5 un</span>
-                            <button onclick="abrirOrcamento(event, 'Fita Adesiva', '5 unidades')" class="btn-produto">Orçar</button>
+                            <button onclick="abrirOrcamento(event, 'Fita Adesiva', '5 unidades')" class="btn-produto">ORÇAR</button>
                         </div>
                     </div>
+                    <button onclick="simular(event)" class="btn-simular-full">SIMULE AQUI &rarr;</button>
                 </div>
 
-
             </div>
+
             <p style="text-align: right; font-size: 0.8rem; color: #64748b; margin-top: 20px;">*Região metropolitana de Fortaleza.</p>
         </div>
     </section>
@@ -517,9 +360,32 @@
         <button class="modal-close" onclick="fecharOrcamento()">&times;</button>
         <h3 style="color: var(--cor-primaria); font-family: var(--fonte-titulo); font-size: 1.6rem; margin-bottom: 5px;">Orçamento Rápido</h3>
         <p style="color: #64748b; margin-bottom: 25px; font-size: 0.95rem;">Configure o seu pedido abaixo.</p>
-        <div class="form-group" style="margin-bottom: 15px;"><label class="form-label">Produto Selecionado</label><input type="text" id="modalProduto" class="form-input" readonly style="color: #64748b; border-bottom: 1px dashed #cbd5e1;"></div>
-        <div class="form-group" style="margin-bottom: 15px;"><label class="form-label">Quantidade Desejada</label><input type="text" id="modalQtd" class="form-input" required><small id="modalQtdMin" style="color: var(--cor-destaque); font-size: 0.75rem; margin-top: 5px;"></small></div>
-        <div class="form-group" style="margin-bottom: 30px;"><label class="form-label">Pagamento</label>
+        
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label class="form-label">Produto Selecionado</label>
+            <input type="text" id="modalProduto" class="form-input" readonly style="color: #64748b; border-bottom: 1px dashed #cbd5e1;">
+        </div>
+        
+        <div class="form-group" id="grupoOpcoes" style="display: none; margin-bottom: 15px;">
+            <label class="form-label">Tamanho / Modelo <span>*</span></label>
+            <select id="modalOpcoes" class="form-input" style="background-color: white;">
+                </select>
+        </div>
+
+        <div class="form-group" id="grupoAdicionais" style="display: none; margin-bottom: 15px;">
+            <label class="form-label">Adicionais (Opcional)</label>
+            <div id="listaAdicionais" style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+                </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 15px;">
+            <label class="form-label">Quantidade Desejada</label>
+            <input type="text" id="modalQtd" class="form-input" required>
+            <small id="modalQtdMin" style="color: var(--cor-destaque); font-size: 0.75rem; margin-top: 5px;"></small>
+        </div>
+        
+        <div class="form-group" style="margin-bottom: 30px;">
+            <label class="form-label">Pagamento</label>
             <select id="modalPagamento" class="form-input" style="background-color: white;" required>
                 <option value="" disabled selected>Selecione...</option>
                 <option value="Pix">Pix</option>
@@ -527,6 +393,7 @@
                 <option value="Cartão de Crédito">Cartão de Crédito</option>
             </select>
         </div>
+        
         <button onclick="redirecionarLeadster()" class="btn-leadster">
              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
              Iniciar Atendimento
@@ -535,27 +402,117 @@
 </div>
 
 <script>
-    // Menu Mobile e Links
     const menuToggle = document.getElementById('menuToggle');
     const navMenu = document.getElementById('navMenu');
     menuToggle.addEventListener('click', () => navMenu.classList.toggle('active'));
     document.querySelectorAll('.nav-menu a').forEach(link => link.addEventListener('click', () => navMenu.classList.remove('active')));
 
-    // Orçamento Modal
-    function abrirOrcamento(event, produto, minQtdTexto) {
+    // Arrays com os dados das caixas
+    const listaProntaEntrega = [
+        "21x19x21cm (Onda B) - R$ 2,97",
+        "23x16x12,5cm (Onda B) - R$ 2,20",
+        "26x26x26cm (Onda B) - R$ 3,38",
+        "32x25x25cm (Onda B) - R$ 3,66",
+        "34x23x30cm (Onda B) - R$ 3,66",
+        "41x30x30cm (Onda B) - R$ 5,14",
+        "48x40x50cm (Onda B) - R$ 8,60"
+    ];
+
+    // Aqui removemos a fita e o plástico e deixamos apenas as caixas
+    const listaMudanca = [
+        "35x31x31cm (Duplo) - R$ 11,80",
+        "41x30x31cm - R$ 9,00",
+        "47x32x20cm - R$ 8,80",
+        "49x39x30cm (Duplo) - R$ 15,30",
+        "65x40x40cm (Duplo) - R$ 19,40"
+    ];
+
+    // Array exclusivo para os produtos extras que vão virar caixinhas de seleção
+    const adicionaisMudanca = [
+        "Fita Adesiva - R$ 12,50",
+        "Plástico Bolha (1,3x100m) - R$ 120,00",
+        "Plástico Bolha (metro) - R$ 2,50"
+    ];
+
+    function simular(event) {
+        event.preventDefault(); 
+        event.stopPropagation();
+        alert("Área de simulação em desenvolvimento! Aqui vai carregar sua calculadora de caixas.");
+    }
+
+    // Função atualizada para aceitar as caixas principais (opcoes) e os extras (adicionais)
+    function abrirOrcamento(event, produto, minQtdTexto, opcoes = null, adicionais = null) {
         event.preventDefault(); event.stopPropagation(); 
         document.getElementById('modalOrcamento').style.display = 'flex';
         document.getElementById('modalProduto').value = produto;
         document.getElementById('modalQtd').value = minQtdTexto;
         document.getElementById('modalQtdMin').innerText = `O pedido mínimo é de ${minQtdTexto}.`;
+        
+        // Controle de exibição do dropdown dinâmico (Tamanhos/Modelos)
+        const grupoOpcoes = document.getElementById('grupoOpcoes');
+        const selectOpcoes = document.getElementById('modalOpcoes');
+        
+        if (opcoes && opcoes.length > 0) {
+            grupoOpcoes.style.display = 'flex';
+            selectOpcoes.innerHTML = '<option value="" disabled selected>Selecione um tamanho/modelo...</option>';
+            opcoes.forEach(op => {
+                selectOpcoes.innerHTML += `<option value="${op}">${op}</option>`;
+            });
+        } else {
+            grupoOpcoes.style.display = 'none';
+            selectOpcoes.innerHTML = '';
+        }
+
+        // Controle de exibição dos Adicionais Opcionais (Checkboxes)
+        const grupoAdicionais = document.getElementById('grupoAdicionais');
+        const listaAdicionais = document.getElementById('listaAdicionais');
+
+        if (adicionais && adicionais.length > 0) {
+            grupoAdicionais.style.display = 'flex';
+            listaAdicionais.innerHTML = '';
+            adicionais.forEach(add => {
+                listaAdicionais.innerHTML += `
+                    <label style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: #475569; cursor: pointer;">
+                        <input type="checkbox" name="adicionais" value="${add}" style="accent-color: var(--cor-destaque); width: 16px; height: 16px;">
+                        ${add}
+                    </label>
+                `;
+            });
+        } else {
+            grupoAdicionais.style.display = 'none';
+            listaAdicionais.innerHTML = '';
+        }
     }
+
     function fecharOrcamento() { document.getElementById('modalOrcamento').style.display = 'none'; }
+    
     function redirecionarLeadster() {
         const produto = document.getElementById('modalProduto').value;
         const qtd = document.getElementById('modalQtd').value;
         const pagamento = document.getElementById('modalPagamento').value;
-        if(!qtd || !pagamento) { alert("Por favor, preencha a quantidade e a forma de pagamento."); return; }
-        const leadsterUrl = `https://app.leadster.com.br/capture/S3cED9kjoR9eRjJs?produto=${encodeURIComponent(produto)}&quantidade=${encodeURIComponent(qtd)}&pagamento=${encodeURIComponent(pagamento)}`;
+        
+        const grupoOpcoes = document.getElementById('grupoOpcoes');
+        const opcaoSelecionada = document.getElementById('modalOpcoes').value;
+
+        if(!qtd || !pagamento || (grupoOpcoes.style.display === 'flex' && !opcaoSelecionada)) { 
+            alert("Por favor, preencha todos os campos obrigatórios, incluindo o tamanho/modelo."); 
+            return; 
+        }
+        
+        // Monta o nome do produto com o tamanho escolhido
+        let nomeProdutoFinal = produto;
+        if (grupoOpcoes.style.display === 'flex') {
+            nomeProdutoFinal += ` (${opcaoSelecionada})`;
+        }
+
+        // Coleta os adicionais marcados
+        const checkboxes = document.querySelectorAll('input[name="adicionais"]:checked');
+        if (checkboxes.length > 0) {
+            let addSelecionados = Array.from(checkboxes).map(cb => cb.value);
+            nomeProdutoFinal += ` + Adicionais: [${addSelecionados.join(', ')}]`;
+        }
+
+        const leadsterUrl = `https://app.leadster.com.br/capture/S3cED9kjoR9eRjJs?produto=${encodeURIComponent(nomeProdutoFinal)}&quantidade=${encodeURIComponent(qtd)}&pagamento=${encodeURIComponent(pagamento)}`;
         window.open(leadsterUrl, '_blank');
         fecharOrcamento();
     }
