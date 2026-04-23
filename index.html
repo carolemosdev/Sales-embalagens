@@ -71,13 +71,13 @@
                     <a href="caixas-personalizadas.html" class="card-link-overlay"></a>
                     <img src="./imagens/01.png" alt="Caixas de Papelão Personalizadas">
                     <div class="card-conteudo">
+                        <span class="tag-destaque">⁠Frete grátis para Fortaleza e Região metropolitana.</span>
                         <h3>Caixas Personalizadas</h3>
                         <p style="font-size: 0.9rem; color: #64748b;">Opção ideal para sua marca.</p>
                         <ul class="lista-specs">
                             <li>Ondas: B, C e B/C</li>
                             <li>Cores: Parda e Parda/Branca</li>
                             <li>Impressões em 2 cores</li>
-                            <li>⁠Frete grátis para Fortaleza e Região metropolitana.</li>
                         </ul>
                         <div class="pedido-minimo">
                             <span>Mínimo: 500 un</span>
@@ -111,6 +111,7 @@
                     <a href="caixas-pronta-entrega.html" class="card-link-overlay"></a>
                     <img src="./imagens/02.png" alt="Caixas à Pronta Entrega">
                     <div class="card-conteudo">
+                        <span class="tag-destaque">Rápido</span>
                         <h3>Caixas à Pronta Entrega</h3>
                         <ul class="lista-specs">
                             <li>Mais rápido, em até 2 dias úteis.</li>
@@ -317,6 +318,16 @@
                     </div>
                 </div>
 
+                <div class="card-depoimento">
+                    <div class="estrelas">★★★★★</div>
+                    <p class="texto-depoimento">"Conheci a S através de uma pesquisa no Google e desde então consegui reduzir meus custos no planejamento de obras comprando papelão ondulado direto da fábrica."</p>
+                    <img src="./imagens/karoliny.jpeg" alt="Karoliny Alves" class="cliente-foto">
+                    <div class="cliente-info-box">
+                        <strong>Karoliny Alves</strong>
+                        <span>Scala Engenharia</span>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -369,13 +380,13 @@
         <div class="form-group" id="grupoOpcoes" style="display: none; margin-bottom: 15px;">
             <label class="form-label">Tamanho / Modelo <span>*</span></label>
             <select id="modalOpcoes" class="form-input" style="background-color: white;">
-                </select>
+            </select>
         </div>
 
         <div class="form-group" id="grupoAdicionais" style="display: none; margin-bottom: 15px;">
             <label class="form-label">Adicionais (Opcional)</label>
             <div id="listaAdicionais" style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
-                </div>
+            </div>
         </div>
 
         <div class="form-group" style="margin-bottom: 15px;">
@@ -407,7 +418,6 @@
     menuToggle.addEventListener('click', () => navMenu.classList.toggle('active'));
     document.querySelectorAll('.nav-menu a').forEach(link => link.addEventListener('click', () => navMenu.classList.remove('active')));
 
-    // Arrays com os dados das caixas
     const listaProntaEntrega = [
         "21x19x21cm (Onda B) - R$ 2,97",
         "23x16x12,5cm (Onda B) - R$ 2,20",
@@ -418,7 +428,6 @@
         "48x40x50cm (Onda B) - R$ 8,60"
     ];
 
-    // Aqui removemos a fita e o plástico e deixamos apenas as caixas
     const listaMudanca = [
         "35x31x31cm (Duplo) - R$ 11,80",
         "41x30x31cm - R$ 9,00",
@@ -427,7 +436,6 @@
         "65x40x40cm (Duplo) - R$ 19,40"
     ];
 
-    // Array exclusivo para os produtos extras que vão virar caixinhas de seleção
     const adicionaisMudanca = [
         "Fita Adesiva - R$ 12,50",
         "Plástico Bolha (1,3x100m) - R$ 120,00",
@@ -440,7 +448,6 @@
         alert("Área de simulação em desenvolvimento! Aqui vai carregar sua calculadora de caixas.");
     }
 
-    // Função atualizada para aceitar as caixas principais (opcoes) e os extras (adicionais)
     function abrirOrcamento(event, produto, minQtdTexto, opcoes = null, adicionais = null) {
         event.preventDefault(); event.stopPropagation(); 
         document.getElementById('modalOrcamento').style.display = 'flex';
@@ -448,7 +455,6 @@
         document.getElementById('modalQtd').value = minQtdTexto;
         document.getElementById('modalQtdMin').innerText = `O pedido mínimo é de ${minQtdTexto}.`;
         
-        // Controle de exibição do dropdown dinâmico (Tamanhos/Modelos)
         const grupoOpcoes = document.getElementById('grupoOpcoes');
         const selectOpcoes = document.getElementById('modalOpcoes');
         
@@ -463,7 +469,6 @@
             selectOpcoes.innerHTML = '';
         }
 
-        // Controle de exibição dos Adicionais Opcionais (Checkboxes)
         const grupoAdicionais = document.getElementById('grupoAdicionais');
         const listaAdicionais = document.getElementById('listaAdicionais');
 
@@ -499,13 +504,11 @@
             return; 
         }
         
-        // Monta o nome do produto com o tamanho escolhido
         let nomeProdutoFinal = produto;
         if (grupoOpcoes.style.display === 'flex') {
             nomeProdutoFinal += ` (${opcaoSelecionada})`;
         }
 
-        // Coleta os adicionais marcados
         const checkboxes = document.querySelectorAll('input[name="adicionais"]:checked');
         if (checkboxes.length > 0) {
             let addSelecionados = Array.from(checkboxes).map(cb => cb.value);
