@@ -16,12 +16,13 @@
         /* --- ROLAGEM SUAVE (Para o novo menu) --- */
         html { scroll-behavior: smooth; scroll-padding-top: 110px; }
 
-        :root { --cor-primaria: #0f172a; --cor-destaque: #ea580c; --bg-cinza: #f8fafc; --fonte-titulo: 'Montserrat', sans-serif; }
+        /* APLICANDO O SEU AZUL EXATO AQUI */
+        :root { --cor-primaria: rgb(10, 20, 53); --cor-destaque: #ea580c; --bg-cinza: #f8fafc; --fonte-titulo: 'Montserrat', sans-serif; }
         body { font-family: 'Inter', sans-serif; color: #334155; }
         
-        /* --- NOVO HEADER FLUTUANTE --- */
+        /* --- NOVO HEADER FLUTUANTE (Fundo Azul) --- */
         .header { 
-            background: var(--bg-cinza); 
+            background: var(--cor-primaria); /* Mudado para puxar o azul escuro */
             padding: 10px 30px; 
             position: fixed; 
             width: calc(100% - 40px);
@@ -31,8 +32,8 @@
             transform: translateX(-50%); 
             z-index: 1000; 
             border-radius: 50px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06); 
-            border: 1px solid rgba(255,255,255,0.8); 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
+            border: 1px solid rgba(255,255,255,0.1); 
         }
         .navbar { display: flex; justify-content: space-between; align-items: center; width: 100%; }
         
@@ -40,12 +41,14 @@
         .logo { text-decoration: none; display: flex; align-items: center; }
         .logo img { height: 45px; width: auto; display: block; }
 
+        /* Links brancos para dar contraste com o fundo azul */
         .nav-menu { display: flex; align-items: center; }
-        .nav-menu a { margin-left: 30px; color: var(--cor-primaria); font-weight: 600; text-decoration: none; transition: color 0.3s; }
+        .nav-menu a { margin-left: 30px; color: #fff; font-weight: 600; text-decoration: none; transition: color 0.3s; }
         .nav-menu a:hover { color: var(--cor-destaque); }
-        .menu-toggle { display: none; background: none; border: none; color: var(--cor-primaria); cursor: pointer; padding: 5px; }
+        .menu-toggle { display: none; background: none; border: none; color: #fff; cursor: pointer; padding: 5px; }
 
-        .btn-novo { background: var(--cor-destaque); color: #fff; padding: 16px 35px; border-radius: 6px; font-weight: 700; text-transform: uppercase; text-decoration: none; display: inline-block; }
+        .btn-novo { background: var(--cor-destaque); color: #fff; padding: 16px 35px; border-radius: 6px; font-weight: 700; text-transform: uppercase; text-decoration: none; display: inline-block; transition: 0.3s; }
+        .btn-novo:hover { opacity: 0.9; transform: translateY(-2px); }
         
         /* Layout Produto Detalhe */
         .produto-hero { padding: 160px 20px 80px; background: var(--bg-cinza); }
@@ -64,12 +67,13 @@
         .form-group { display: flex; flex-direction: column; }
         .full-width { grid-column: 1 / -1; }
         .form-label { font-weight: 600; color: var(--cor-primaria); margin-bottom: 5px; }
-        .form-input { border: none; border-bottom: 2px solid #881337; padding: 10px 0; font-family: 'Inter'; font-size: 1rem; background: transparent; transition: border-color 0.3s; }
-        .form-input:focus { outline: none; border-bottom-color: var(--cor-destaque); }
+        .form-input { border: none; border-bottom: 2px solid var(--cor-destaque); padding: 10px 0; font-family: 'Inter'; font-size: 1rem; background: transparent; transition: border-color 0.3s; }
+        .form-input:focus { outline: none; border-bottom-color: var(--cor-primaria); }
         
-        /* --- ESTILOS DO INSTAGRAM --- */
-        .social-icon { display: inline-flex; align-items: center; justify-content: center; color: var(--cor-primaria); transition: color 0.3s ease, transform 0.3s ease; margin-left: 30px; vertical-align: middle; }
-        .social-icon:hover { color: #E1306C; transform: scale(1.15); }
+        /* --- ESTILOS DO INSTAGRAM NO HEADER (Branco) --- */
+        .social-icon { display: inline-flex; align-items: center; justify-content: center; color: #fff; transition: color 0.3s ease, transform 0.3s ease; margin-left: 30px; vertical-align: middle; }
+        .social-icon:hover { color: var(--cor-destaque); transform: scale(1.15); }
+        
         .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .footer-social a { color: #94a3b8; transition: color 0.3s ease, transform 0.3s ease; display: inline-block; }
         .footer-social a:hover { color: #E1306C; transform: scale(1.15); }
@@ -90,17 +94,17 @@
                 top: 70px;
                 left: 0;
                 width: 100%;
-                background: var(--bg-cinza);
+                background: var(--cor-primaria); /* Fundo do menu mobile azul escuro também */
                 padding: 20px;
                 box-shadow: 0 10px 25px rgba(0,0,0,0.1);
                 border-radius: 20px;
-                border: 1px solid #e2e8f0;
+                border: 1px solid rgba(255,255,255,0.1);
                 text-align: center;
                 gap: 15px;
                 z-index: 1000;
             }
             .nav-menu.active { display: flex; animation: slideDown 0.3s ease-out; }
-            .nav-menu a { margin: 0; font-size: 1rem; width: 100%; padding: 10px 0; border-bottom: 1px solid #e2e8f0; }
+            .nav-menu a { margin: 0; color: #fff; font-size: 1rem; width: 100%; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
             .nav-menu a:last-child { border-bottom: none; }
             .social-icon { margin: 10px auto 0; display: inline-flex; width: fit-content; border: none; }
         }
@@ -145,7 +149,6 @@
              <a href="index.html#diferenciais">Compromisso</a>
              <a href="missao-valores.html">Missão e Valores</a>
              <a href="index.html#parceiros">Clientes</a>
-             <a href="index.html#depoimentos">Feedbacks</a>
              <a href="index.html#contato">Contato</a>
              <a href="https://www.instagram.com/salesemb" target="_blank" class="social-icon" title="Siga-nos no Instagram">
                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -208,7 +211,7 @@
     </section>
 </main>
 
-<footer style="background: #0f172a; color: #94a3b8; padding: 30px 0; font-size: 0.9rem;">
+<footer style="background: var(--cor-primaria); color: #94a3b8; padding: 30px 0; font-size: 0.9rem;">
     <div class="footer-content">
         <p style="margin: 0;">&copy; 2026 S. Embalagens. Todos os direitos reservados.</p>
         

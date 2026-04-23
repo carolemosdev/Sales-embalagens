@@ -16,8 +16,9 @@
         /* --- ROLAGEM SUAVE --- */
         html { scroll-behavior: smooth; scroll-padding-top: 110px; }
 
+        /* APLICANDO O SEU AZUL EXATO AQUI */
         :root { 
-            --cor-primaria: #061c41; 
+            --cor-primaria: rgb(10, 20, 53); 
             --cor-destaque: #e30a21; 
             --bg-cinza: #f8fafc; 
             --fonte-titulo: 'Montserrat', sans-serif; 
@@ -26,9 +27,9 @@
         body { font-family: 'Inter', sans-serif; color: #334155; background-color: var(--bg-cinza); margin: 0; padding: 0; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         
-        /* --- HEADER E MENU FLUTUANTE --- */
+        /* --- NOVO HEADER FLUTUANTE (Fundo Azul) --- */
         .header { 
-            background: var(--bg-cinza); 
+            background: var(--cor-primaria); /* Mudado para puxar o azul escuro */
             padding: 10px 30px; 
             position: fixed; 
             width: calc(100% - 40px);
@@ -38,17 +39,22 @@
             transform: translateX(-50%); 
             z-index: 1000; 
             border-radius: 50px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06); 
-            border: 1px solid rgba(255,255,255,0.8); 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
+            border: 1px solid rgba(255,255,255,0.1); 
         }
         .navbar { display: flex; justify-content: space-between; align-items: center; width: 100%; }
         .logo { text-decoration: none; display: flex; align-items: center; }
         .logo img { height: 45px; width: auto; display: block; }
         
+        /* Links brancos para dar contraste com o fundo azul */
         .nav-menu { display: flex; align-items: center; }
-        .nav-menu a { margin-left: 30px; color: var(--cor-primaria); font-weight: 600; text-decoration: none; transition: color 0.3s; }
+        .nav-menu a { margin-left: 30px; color: #fff; font-weight: 600; text-decoration: none; transition: color 0.3s; }
         .nav-menu a:hover { color: var(--cor-destaque); }
-        .menu-toggle { display: none; background: none; border: none; color: var(--cor-primaria); cursor: pointer; padding: 5px; }
+        .menu-toggle { display: none; background: none; border: none; color: #fff; cursor: pointer; padding: 5px; }
+
+        /* --- ESTILOS DO INSTAGRAM NO HEADER (Branco) --- */
+        .social-icon { display: inline-flex; align-items: center; justify-content: center; color: #fff; transition: color 0.3s ease, transform 0.3s ease; margin-left: 30px; vertical-align: middle; }
+        .social-icon:hover { color: var(--cor-destaque); transform: scale(1.15); }
 
         /* --- PÁGINA DE MISSÃO E VALORES --- */
         .pagina-hero { padding: 180px 20px 80px; text-align: center; background-color: var(--cor-primaria); color: #fff; }
@@ -68,11 +74,9 @@
         .valores-lista li { margin-bottom: 10px; font-weight: 600; color: var(--cor-primaria); display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; }
         .valores-lista li::before { content: '✓'; color: var(--cor-destaque); font-weight: bold; }
 
-        /* --- REDES SOCIAIS E FOOTER --- */
-        .social-icon { display: inline-flex; align-items: center; justify-content: center; color: var(--cor-primaria); transition: color 0.3s ease, transform 0.3s ease; margin-left: 30px; vertical-align: middle; }
-        .social-icon:hover { color: var(--cor-destaque); transform: scale(1.15); }
+        /* --- FOOTER --- */
         .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
-        .footer-social a { color: #fff; transition: color 0.3s ease, transform 0.3s ease; display: inline-block; opacity: 0.8; }
+        .footer-social a { color: #94a3b8; transition: color 0.3s ease, transform 0.3s ease; display: inline-block; opacity: 0.8; }
         .footer-social a:hover { color: var(--cor-destaque); transform: scale(1.15); opacity: 1; }
 
         /* --- RESPONSIVIDADE --- */
@@ -87,19 +91,19 @@
                 top: 70px; 
                 left: 0; 
                 width: 100%; 
-                background: var(--bg-cinza); 
+                background: var(--cor-primaria); /* Fundo do menu mobile azul escuro também */
                 padding: 20px; 
                 box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
                 border-radius: 20px; 
-                border: 1px solid #e2e8f0; 
+                border: 1px solid rgba(255,255,255,0.1); 
                 text-align: center; 
                 gap: 15px; 
                 z-index: 1000; 
             }
             .nav-menu.active { display: flex; animation: slideDown 0.3s ease-out; }
-            .nav-menu a { color: var(--cor-primaria); margin: 0; font-size: 1rem; width: 100%; padding: 10px 0; border-bottom: 1px solid #e2e8f0; }
+            .nav-menu a { color: #fff; margin: 0; font-size: 1rem; width: 100%; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
             .nav-menu a:last-child { border-bottom: none; }
-            .social-icon { margin: 10px auto 0; color: var(--cor-primaria); display: inline-flex; width: fit-content; border: none; }
+            .social-icon { margin: 10px auto 0; display: inline-flex; width: fit-content; border: none; }
             .pagina-hero { padding: 140px 20px 60px; }
             .pagina-hero h1 { font-size: 2.2rem; }
         }
@@ -136,7 +140,6 @@
              <a href="index.html#diferenciais">Compromisso</a>
              <a href="missao-valores.html" style="color: var(--cor-destaque);">Missão e Valores</a>
              <a href="index.html#parceiros">Clientes</a>
-             <a href="index.html#depoimentos">Feedbacks</a>
              <a href="index.html#contato">Contato</a>
              <a href="https://www.instagram.com/salesemb" target="_blank" class="social-icon" title="Siga-nos no Instagram">
                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
