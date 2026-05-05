@@ -13,6 +13,41 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="./output.css">
+
+    <style>
+        /* --- CORREÇÃO DEFINITIVA DO CARROSSEL INFINITO --- */
+        /* Esta nova estrutura evita o "corte" de limite de textura do navegador */
+        .marquee-wrapper {
+            display: flex;
+            overflow: hidden;
+            width: 100%;
+            background: #fff;
+            padding: 40px 0;
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .marquee-content {
+            display: flex;
+            flex-shrink: 0;
+            align-items: center;
+            animation: scrollLogos 30s linear infinite;
+        }
+        .marquee-content img {
+            margin: 0 40px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        .marquee-content img:hover {
+            transform: scale(1.1);
+        }
+        @keyframes scrollLogos {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        .marquee-wrapper:hover .marquee-content {
+            animation-play-state: paused;
+        }
+    </style>
 </head>
 <body>
 
@@ -57,7 +92,7 @@
                 <a href="#catalogo" class="btn-novo">Ver Catálogo Completo</a>
             </div>
             <div class="hero-imagem-fundo">
-                <img src="./imagens/caixas.png" alt="Caixas de papelão e insumos de embalagem" loading="lazy">
+                <img src="./imagens/caixas.png" alt="Caixas de papelão e insumos de embalagem">
             </div>
         </div>
     </section>
@@ -259,27 +294,58 @@
         <div class="container text-center" style="margin-bottom: 30px;">
             <span style="color: #64748b; font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">Clientes que confiam na Sales Embalagens</span>
         </div>
-        <div class="marquee-container">
-            <div class="marquee-track">
-                <img src="./imagens/boticario.png" alt="Boticário" loading="lazy">
-                <img src="./imagens/cagece.png" alt="Cagece" loading="lazy">
-                <img src="./imagens/goldentec.png" alt="Goldentec" loading="lazy">
-                <img src="./imagens/hidrotintas.png" alt="Hidrotintas" loading="lazy">
-                <img src="./imagens/ley.png" alt="Ley" loading="lazy">
-                <img src="./imagens/livraria.png" alt="Livraria" loading="lazy">
-                <img src="./imagens/pepy.png" alt="Pepy" loading="lazy">
-                <img src="./imagens/tpc.png" alt="TPC" loading="lazy">
-                <img src="./imagens/wurth.png" alt="Wurth" loading="lazy">
-                <img src="./imagens/boticario.png" alt="Boticário" loading="lazy">
-                <img src="./imagens/cagece.png" alt="Cagece" loading="lazy">
-                <img src="./imagens/goldentec.png" alt="Goldentec" loading="lazy">
-                <img src="./imagens/hidrotintas.png" alt="Hidrotintas" loading="lazy">
-                <img src="./imagens/ley.png" alt="Ley" loading="lazy">
-                <img src="./imagens/livraria.png" alt="Livraria" loading="lazy">
-                <img src="./imagens/pepy.png" alt="Pepy" loading="lazy">
-                <img src="./imagens/tpc.png" alt="TPC" loading="lazy">
-                <img src="./imagens/wurth.png" alt="Wurth" loading="lazy">
+        
+        <!-- O container com as novas classes do carrossel -->
+        <div class="marquee-wrapper">
+            
+            <!-- BLOCO 1 -->
+            <div class="marquee-content">
+                <img src="./imagens/boticario.png" alt="Boticário" style="height: 65px;">
+                <img src="./imagens/cagece.png" alt="Cagece" style="height: 65px;">
+                <img src="./imagens/goldentec.png" alt="Goldentec" style="height: 65px;">
+                <img src="./imagens/hidrotintas.png" alt="Hidrotintas" style="height: 65px;">
+                <img src="./imagens/ley.png" alt="Ley" style="height: 65px;">
+                <img src="./imagens/livraria.png" alt="Livraria" style="height: 65px;">
+                <img src="./imagens/pepy.png" alt="Pepy" style="height: 65px;">
+                <img src="./imagens/tpc.png" alt="TPC" style="height: 65px;">
+                <img src="./imagens/wurth.png" alt="Wurth" style="height: 65px;">
+                
+                <img src="./imagens/estarbem.png" alt="Estar bem" style="height: 75px;">
+                <img src="./imagens/fuselabs.png" alt="Fuselabs" style="height: 75px;">
+                <img src="./imagens/linge.jpg" alt="Linge" style="height: 75px;">
+                <img src="./imagens/bnb.jpeg" alt="Banco do Nordeste" style="height: 75px;">
+                <img src="./imagens/miligrama.png" alt="Miligrama" style="height: 45px;">
+                <img src="./imagens/nbs.jpeg" alt="NBS Burger" style="height: 75px;">
+                <img src="./imagens/floresta.jpeg" alt="Floresta Bar" style="height: 75px;">
+                <img src="./imagens/pulcinella.png" alt="Pulcinella" style="height: 75px;">
+                <img src="./imagens/portugalia.png" alt="Portugália" style="height: 75px;">
+                <img src="./imagens/sauce.jpeg" alt="Sauce" style="height: 75px;">
             </div>
+
+            <!-- BLOCO 2 (Idêntico ao Bloco 1, necessário para o looping perfeito) -->
+            <div class="marquee-content">
+                <img src="./imagens/boticario.png" alt="Boticário" style="height: 65px;">
+                <img src="./imagens/cagece.png" alt="Cagece" style="height: 65px;">
+                <img src="./imagens/goldentec.png" alt="Goldentec" style="height: 65px;">
+                <img src="./imagens/hidrotintas.png" alt="Hidrotintas" style="height: 65px;">
+                <img src="./imagens/ley.png" alt="Ley" style="height: 65px;">
+                <img src="./imagens/livraria.png" alt="Livraria" style="height: 65px;">
+                <img src="./imagens/pepy.png" alt="Pepy" style="height: 65px;">
+                <img src="./imagens/tpc.png" alt="TPC" style="height: 65px;">
+                <img src="./imagens/wurth.png" alt="Wurth" style="height: 65px;">
+                
+                <img src="./imagens/estarbem.png" alt="Estar bem" style="height: 75px;">
+                <img src="./imagens/fuselabs.png" alt="Fuselabs" style="height: 75px;">
+                <img src="./imagens/linge.jpg" alt="Linge" style="height: 75px;">
+                <img src="./imagens/bnb.jpeg" alt="Banco do Nordeste" style="height: 75px;">
+                <img src="./imagens/miligrama.png" alt="Miligrama" style="height: 45px;">
+                <img src="./imagens/nbs.jpeg" alt="NBS Burger" style="height: 75px;">
+                <img src="./imagens/floresta.jpeg" alt="Floresta Bar" style="height: 75px;">
+                <img src="./imagens/pulcinella.png" alt="Pulcinella" style="height: 75px;">
+                <img src="./imagens/portugalia.png" alt="Portugália" style="height: 75px;">
+                <img src="./imagens/sauce.jpeg" alt="Sauce" style="height: 75px;">
+            </div>
+            
         </div>
     </section>
 
@@ -330,6 +396,26 @@
                     </div>
                 </div>
 
+                <div class="card-depoimento">
+                    <div class="estrelas">★★★★★</div>
+                    <p class="texto-depoimento">"Compramos Caixas de pizza personalizadas e fiquei muito satisfeita. Qualidade excelente e impressão bem feita, valorizou muito nosso produto."</p>
+                    <img src="./imagens/sauce.jpeg" alt="Sauce" class="cliente-foto" loading="lazy">
+                    <div class="cliente-info-box">
+                        <strong>Fabiane</strong>
+                        <span>Sauce Pizza</span>
+                    </div>
+                </div>
+
+                <div class="card-depoimento">
+                    <div class="estrelas">★★★★★</div>
+                    <p class="texto-depoimento">"Qualidade Top. As caixas valorizam muito a entrega e ajudam na experiência do cliente final."</p>
+                    <img src="./imagens/nbs.jpeg" alt="NBS" class="cliente-foto" loading="lazy">
+                    <div class="cliente-info-box">
+                        <strong>Luciano</strong>
+                        <span>Grupo NBS</span>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -368,41 +454,49 @@
     </div>
 </footer>
 
+<!-- MODAL DE ORÇAMENTO ATUALIZADO -->
 <div id="modalOrcamento" class="modal-overlay">
-    <div class="modal-box">
+    <div class="modal-box" style="max-height: 90vh; overflow-y: auto;">
         <button class="modal-close" onclick="fecharOrcamento()">&times;</button>
         <h3 style="color: var(--cor-primaria); font-family: var(--fonte-titulo); font-size: 1.6rem; margin-bottom: 5px;">Orçamento Rápido</h3>
         <p style="color: #64748b; margin-bottom: 25px; font-size: 0.95rem;">Configure o seu pedido abaixo.</p>
         
         <div class="form-group" style="margin-bottom: 15px;">
             <label class="form-label">Produto Selecionado</label>
-            <input type="text" id="modalProduto" class="form-input" readonly style="color: #64748b; border-bottom: 1px dashed #cbd5e1;">
+            <input type="text" id="modalProduto" class="form-input" readonly style="color: #64748b; border-bottom: 1px dashed #cbd5e1; font-weight: 600;">
         </div>
         
-        <div class="form-group" id="grupoOpcoes" style="display: none; margin-bottom: 15px;">
-            <label class="form-label">Tamanho / Modelo <span>*</span></label>
-            <select id="modalOpcoes" class="form-input" style="background-color: white;">
-            </select>
+        <!-- GRID DE OPÇÕES MÚLTIPLAS -->
+        <div class="form-group" id="grupoOpcoesGrid" style="display: none; margin-bottom: 15px;">
+            <label class="form-label">Insira a quantidade por tamanho <span>*</span></label>
+            <div id="listaOpcoesQtd" style="display: flex; flex-direction: column; gap: 8px; margin-top: 5px; max-height: 220px; overflow-y: auto; padding-right: 5px;">
+                <!-- Preenchido via Javascript -->
+            </div>
+            <div id="textoTotalOpcoes" style="margin-top: 10px; font-weight: bold; font-size: 0.95rem; text-align: right;"></div>
         </div>
 
+        <!-- QUANTIDADE ÚNICA -->
+        <div class="form-group" id="grupoQtdUnica" style="margin-bottom: 15px;">
+            <label class="form-label">Quantidade Desejada <span>*</span></label>
+            <input type="number" id="modalQtd" class="form-input" min="1">
+            <small id="modalQtdMin" style="color: var(--cor-destaque); font-size: 0.75rem; margin-top: 5px;"></small>
+        </div>
+
+        <!-- ADICIONAIS COM QUANTIDADE -->
         <div class="form-group" id="grupoAdicionais" style="display: none; margin-bottom: 15px;">
             <label class="form-label">Adicionais (Opcional)</label>
-            <div id="listaAdicionais" style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+            <div id="listaAdicionais" style="display: flex; flex-direction: column; gap: 8px; margin-top: 5px; max-height: 150px; overflow-y: auto; padding-right: 5px;">
+                <!-- Preenchido via Javascript -->
             </div>
-        </div>
-
-        <div class="form-group" style="margin-bottom: 15px;">
-            <label class="form-label">Quantidade Desejada</label>
-            <input type="text" id="modalQtd" class="form-input" required>
-            <small id="modalQtdMin" style="color: var(--cor-destaque); font-size: 0.75rem; margin-top: 5px;"></small>
         </div>
         
         <div class="form-group" style="margin-bottom: 30px;">
-            <label class="form-label">Pagamento</label>
-            <select id="modalPagamento" class="form-input" style="background-color: white;" required>
+            <label class="form-label">Pagamento <span>*</span></label>
+            <select id="modalPagamento" class="form-input" style="background-color: white;">
                 <option value="" disabled selected>Selecione...</option>
                 <option value="Pix">Pix</option>
-                <option value="Link Cartão de Crédito">Link Cartão de Crédito</option>
+                <option value="Boleto Faturado">Boleto Faturado</option>
+                <option value="Cartão de Crédito">Cartão de Crédito</option>
             </select>
         </div>
         
@@ -449,39 +543,57 @@
         alert("Área de simulação em desenvolvimento!");
     }
 
+    let minimoAtual = 0;
+    let modoMultiplo = false;
+
     function abrirOrcamento(event, produto, minQtdTexto, opcoes = null, adicionais = null) {
         event.preventDefault(); event.stopPropagation(); 
         document.getElementById('modalOrcamento').style.display = 'flex';
         document.getElementById('modalProduto').value = produto;
-        document.getElementById('modalQtd').value = minQtdTexto;
-        document.getElementById('modalQtdMin').innerText = `O pedido mínimo é de ${minQtdTexto}.`;
         
-        const grupoOpcoes = document.getElementById('grupoOpcoes');
-        const selectOpcoes = document.getElementById('modalOpcoes');
+        minimoAtual = parseInt(minQtdTexto) || 1; 
+        
+        const grupoOpcoes = document.getElementById('grupoOpcoesGrid');
+        const listaOpcoesQtd = document.getElementById('listaOpcoesQtd');
+        const textTotal = document.getElementById('textoTotalOpcoes');
+        const grupoQtdUnica = document.getElementById('grupoQtdUnica');
         
         if (opcoes && opcoes.length > 0) {
-            grupoOpcoes.style.display = 'flex';
-            selectOpcoes.innerHTML = '<option value="" disabled selected>Selecione um tamanho/modelo...</option>';
+            modoMultiplo = true;
+            grupoOpcoes.style.display = 'block';
+            grupoQtdUnica.style.display = 'none';
+
+            listaOpcoesQtd.innerHTML = '';
             opcoes.forEach(op => {
-                selectOpcoes.innerHTML += `<option value="${op}">${op}</option>`;
+                listaOpcoesQtd.innerHTML += `
+                    <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; border-bottom: 1px dashed #e2e8f0; padding-bottom: 6px;">
+                        <span style="font-size: 0.85rem; color: #475569; flex: 1;">${op}</span>
+                        <input type="number" class="input-qtd-multipla" data-nome="${op}" min="0" placeholder="0" style="width: 70px; padding: 6px; text-align: center; border: 1px solid #cbd5e1; border-radius: 6px; font-family: 'Inter';" oninput="calcularTotalMultiplo()">
+                    </div>
+                `;
             });
+            textTotal.innerText = `Total: 0 un / Mínimo: ${minimoAtual} un`;
+            textTotal.style.color = "var(--cor-destaque)";
         } else {
+            modoMultiplo = false;
             grupoOpcoes.style.display = 'none';
-            selectOpcoes.innerHTML = '';
+            grupoQtdUnica.style.display = 'block';
+            document.getElementById('modalQtd').value = '';
+            document.getElementById('modalQtdMin').innerText = `O pedido mínimo é de ${minQtdTexto}.`;
         }
 
         const grupoAdicionais = document.getElementById('grupoAdicionais');
         const listaAdicionais = document.getElementById('listaAdicionais');
 
         if (adicionais && adicionais.length > 0) {
-            grupoAdicionais.style.display = 'flex';
+            grupoAdicionais.style.display = 'block';
             listaAdicionais.innerHTML = '';
             adicionais.forEach(add => {
                 listaAdicionais.innerHTML += `
-                    <label style="display: flex; align-items: center; gap: 8px; font-size: 0.9rem; color: #475569; cursor: pointer;">
-                        <input type="checkbox" name="adicionais" value="${add}" style="accent-color: var(--cor-destaque); width: 16px; height: 16px;">
-                        ${add}
-                    </label>
+                    <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; border-bottom: 1px dashed #e2e8f0; padding-bottom: 6px;">
+                        <span style="font-size: 0.85rem; color: #475569; flex: 1;">${add}</span>
+                        <input type="number" class="input-qtd-adicional" data-nome="${add}" min="0" placeholder="0" style="width: 70px; padding: 6px; text-align: center; border: 1px solid #cbd5e1; border-radius: 6px; font-family: 'Inter';">
+                    </div>
                 `;
             });
         } else {
@@ -490,33 +602,92 @@
         }
     }
 
-    function fecharOrcamento() { document.getElementById('modalOrcamento').style.display = 'none'; }
+    function fecharOrcamento() { 
+        document.getElementById('modalOrcamento').style.display = 'none'; 
+    }
+
+    function calcularTotalMultiplo() {
+        const inputs = document.querySelectorAll('.input-qtd-multipla');
+        let total = 0;
+        
+        inputs.forEach(inp => {
+            total += parseInt(inp.value) || 0;
+        });
+
+        const textTotal = document.getElementById('textoTotalOpcoes');
+        textTotal.innerText = `Total: ${total} un / Mínimo: ${minimoAtual} un`;
+
+        if (total >= minimoAtual) {
+            textTotal.style.color = "#047857"; 
+        } else {
+            textTotal.style.color = "var(--cor-destaque)"; 
+        }
+    }
     
     function redirecionarLeadster() {
         const produto = document.getElementById('modalProduto').value;
-        const qtd = document.getElementById('modalQtd').value;
         const pagamento = document.getElementById('modalPagamento').value;
         
-        const grupoOpcoes = document.getElementById('grupoOpcoes');
-        const opcaoSelecionada = document.getElementById('modalOpcoes').value;
-
-        if(!qtd || !pagamento || (grupoOpcoes.style.display === 'flex' && !opcaoSelecionada)) { 
-            alert("Por favor, preencha todos os campos obrigatórios, incluindo o tamanho/modelo."); 
-            return; 
-        }
-        
+        let qtdFinal = "";
         let nomeProdutoFinal = produto;
-        if (grupoOpcoes.style.display === 'flex') {
-            nomeProdutoFinal += ` (${opcaoSelecionada})`;
+
+        if (modoMultiplo) {
+            const inputs = document.querySelectorAll('.input-qtd-multipla');
+            let total = 0;
+            let itensEscolhidos = [];
+
+            inputs.forEach(inp => {
+                let q = parseInt(inp.value) || 0;
+                if (q > 0) {
+                    total += q;
+                    itensEscolhidos.push(`${q}x ${inp.dataset.nome}`);
+                }
+            });
+
+            if (total < minimoAtual) {
+                alert(`A quantidade total (${total}) não atinge o pedido mínimo de ${minimoAtual} unidades.`);
+                return;
+            }
+            if (!pagamento) {
+                alert("Por favor, selecione a forma de pagamento.");
+                return;
+            }
+
+            qtdFinal = `${total} unidades`;
+            nomeProdutoFinal += `\nItens Selecionados:\n- ` + itensEscolhidos.join('\n- ');
+
+        } else {
+            const inputQtd = document.getElementById('modalQtd').value;
+            let valQtd = parseInt(inputQtd) || 0;
+
+            if (valQtd < minimoAtual) {
+                alert(`A quantidade (${valQtd}) não atinge o pedido mínimo de ${minimoAtual} unidades.`);
+                return;
+            }
+            if (!pagamento) {
+                alert("Por favor, selecione a forma de pagamento.");
+                return;
+            }
+            qtdFinal = `${valQtd} unidades`;
         }
 
-        const checkboxes = document.querySelectorAll('input[name="adicionais"]:checked');
-        if (checkboxes.length > 0) {
-            let addSelecionados = Array.from(checkboxes).map(cb => cb.value);
-            nomeProdutoFinal += ` + Adicionais: [${addSelecionados.join(', ')}]`;
+        const inputsAdicionais = document.querySelectorAll('.input-qtd-adicional');
+        let adicionaisEscolhidos = [];
+        
+        if (inputsAdicionais.length > 0) {
+            inputsAdicionais.forEach(inp => {
+                let q = parseInt(inp.value) || 0;
+                if (q > 0) {
+                    adicionaisEscolhidos.push(`${q}x ${inp.dataset.nome}`);
+                }
+            });
         }
 
-        const leadsterUrl = `https://app.leadster.com.br/capture/S3cED9kjoR9eRjJs?produto=${encodeURIComponent(nomeProdutoFinal)}&quantidade=${encodeURIComponent(qtd)}&pagamento=${encodeURIComponent(pagamento)}`;
+        if (adicionaisEscolhidos.length > 0) {
+            nomeProdutoFinal += `\n\nAdicionais Selecionados:\n- ` + adicionaisEscolhidos.join('\n- ');
+        }
+
+        const leadsterUrl = `https://app.leadster.com.br/capture/S3cED9kjoR9eRjJs?produto=${encodeURIComponent(nomeProdutoFinal)}&quantidade=${encodeURIComponent(qtdFinal)}&pagamento=${encodeURIComponent(pagamento)}`;
         window.open(leadsterUrl, '_blank');
         fecharOrcamento();
     }
